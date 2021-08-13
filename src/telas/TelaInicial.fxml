@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="405.0" prefWidth="630.0" styleClass="mainFxmlClass" stylesheets="@../assets/telainicial.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telaControles.TelaInicialController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="170.0" prefWidth="618.0" styleClass="painelBotoesSuperior">
+               <children>
+                  <Button fx:id="btCadastrarLivro" mnemonicParsing="false" onAction="#chamarCadastroLivro" text="Cadastrar livro" />
+                  <Button fx:id="btCadastrarUsuario" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Cadastrar usuário" />
+                  <Button fx:id="btEmprestar" mnemonicParsing="false" text="Emprestar livro" />
+               </children>
+            </HBox>
+            <HBox prefHeight="133.0" prefWidth="662.0" styleClass="painelBotoesInferior">
+               <children>
+                  <Button fx:id="btRenovar" mnemonicParsing="false" text="Renovar empréstimo" />
+                  <Button fx:id="btDevolver" mnemonicParsing="false" text="Realizar devolucão" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="800.0" styleClass="painelTitulo" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="39.0" prefWidth="319.0" text="Gerenciador Biblioteca X" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>
