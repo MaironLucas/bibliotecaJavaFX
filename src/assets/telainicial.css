@@ -8,11 +8,6 @@
     -fx-border-width: 2;
 }
 
-.label{
-    -fx-font-size: 20pt;
-    -fx-font-weight: bold;
-}
-
 .painelTitulo{
     -fx-background-color: #ffffff;
     -fx-border-color: #000000;
@@ -31,7 +26,7 @@
 
 .painelBotoesSuperior{
     -fx-alignment: center;
-    -fx-padding: 25 25 25 25;
+    -fx-padding: 40 25 25 25;
     -fx-spacing: 40px;
 }
 

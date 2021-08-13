@@ -27,7 +27,7 @@ public class CriarTabelas {
             throw new SQLException("Conexao já estabelecida!");
         String url = "jdbc:mysql://localhost:3306/loo?serverTimezone=UTC";
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conexao = DriverManager.getConnection(url, "root", "anjtmai9810");
+        conexao = DriverManager.getConnection(url, "root", "senha");
         System.out.println("Conexao realizada"); 
     }
 }

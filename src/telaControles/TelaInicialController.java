@@ -8,8 +8,6 @@ package telaControles;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 /**
@@ -36,6 +35,8 @@ public class TelaInicialController implements Initializable {
     private Button btRenovar;
     @FXML
     private Button btDevolver;
+    @FXML
+    private MenuItem menuCadastrarLivro;
 
     /**
      * Initializes the controller class.
@@ -52,6 +53,20 @@ public class TelaInicialController implements Initializable {
             Parent newScene = null;
             stage = (Stage) btCadastrarLivro.getScene().getWindow();
             newScene = FXMLLoader.load(getClass().getClassLoader().getResource("./telas/TelaCadastroLivro.fxml"));
+            Scene scene = new Scene(newScene);
+            stage.setScene(scene);
+        } catch (IOException ex) {
+            System.out.println("Lamentavel");
+        }
+    }
+
+    @FXML
+    private void chamarCadastrarUsuario(ActionEvent event) {
+        try {
+            Stage stage = null;
+            Parent newScene = null;
+            stage = (Stage) btCadastrarLivro.getScene().getWindow();
+            newScene = FXMLLoader.load(getClass().getClassLoader().getResource("./telas/TelaCadastroUsuario.fxml"));
             Scene scene = new Scene(newScene);
             stage.setScene(scene);
         } catch (IOException ex) {

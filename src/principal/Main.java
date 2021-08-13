@@ -7,13 +7,9 @@ package principal;
 
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -29,6 +25,7 @@ public class Main extends Application {
             Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("./telas/TelaInicial.fxml"));
             Scene scene = new Scene(parent);
             primaryStage.setScene(scene);
+            primaryStage.setTitle("Gerenciador de Biblioteca");
             primaryStage.show(); 
         } catch (IOException e){
             System.out.println("Carregou tortao");
