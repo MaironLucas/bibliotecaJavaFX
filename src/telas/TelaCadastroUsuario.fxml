@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="845.0" styleClass="mainFxmlClass" stylesheets="@../assets/telacadastrousuario.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telaControles.TelaCadastroUsuarioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="768.0" styleClass="mainFxmlClass" stylesheets="@../assets/telacadastrousuario.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telaControles.TelaCadastroUsuarioController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelTitulo" BorderPane.alignment="CENTER">
          <children>
@@ -22,7 +22,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="434.0" prefWidth="845.0">
+            <VBox prefHeight="374.0" prefWidth="759.0">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelCentral">
                      <children>
@@ -52,12 +52,12 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status:" />
                         <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <RadioButton fx:id="rAtivo" mnemonicParsing="false" text="Ativo" />
-                              <RadioButton fx:id="rInativo" mnemonicParsing="false" text="Inativo" />
-                              <RadioButton fx:id="rBloqueado" mnemonicParsing="false" text="Bloqueado" />
+                              <RadioButton fx:id="rAtivo" mnemonicParsing="false" onAction="#ativoSelecionado" text="Ativo" />
+                              <RadioButton fx:id="rInativo" mnemonicParsing="false" onAction="#inativoSelecionado" text="Inativo" />
+                              <RadioButton fx:id="rBloqueado" mnemonicParsing="false" onAction="#bloqueadoSelecionado" text="Bloqueado" />
                            </children>
                         </VBox>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Motivo do bloqueio:" />
+                        <Text fx:id="textMotivo" strokeType="OUTSIDE" strokeWidth="0.0" text="Motivo do bloqueio:" />
                         <ChoiceBox fx:id="btMotivo" prefHeight="25.0" prefWidth="174.0" />
                      </children>
                   </HBox>
@@ -74,7 +74,7 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cidade:" />
                         <TextField fx:id="inputCidade" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UF:" />
-                        <TextField fx:id="inputUF" prefHeight="25.0" prefWidth="53.0" />
+                        <ChoiceBox fx:id="btUF" prefHeight="25.0" prefWidth="46.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CEP:" />
                         <TextField fx:id="inputCEP" />
                      </children>
