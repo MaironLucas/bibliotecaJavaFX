@@ -1,0 +1,37 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-color: #cccccc;
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+}
+
+.painelTitulo{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 0 0 2 0;
+}
+
+.button{
+    -fx-font-weight: bold;
+    -fx-pref-height: 100px;
+    -fx-pref-width: 145px;
+    -fx-border-radius: 0;
+    -fx-background-color: #dcdae1;
+    -fx-border-color: #000000;
+    -fx-border-width: 3px;
+}
+
+.painelBotoesSuperior{
+    -fx-alignment: center;
+    -fx-padding: 40 25 25 25;
+    -fx-spacing: 40px;
+}
+
+.painelBotoesInferior{
+    -fx-alignment: center;
+    -fx-padding: 0 25 25 25;
+    -fx-spacing: 40px;
+}

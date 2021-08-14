@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="845.0" styleClass="mainFxmlClass" stylesheets="@../assets/telacadastrousuario.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telaControles.TelaCadastroUsuarioController">
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelTitulo" BorderPane.alignment="CENTER">
+         <children>
+            <Label styleClass="titulo" text="Cadastro de usuário" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="434.0" prefWidth="845.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelCentral">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" />
+                        <TextField fx:id="inputNome" prefHeight="25.0" prefWidth="299.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Documento:" />
+                        <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="142.0">
+                           <children>
+                              <RadioButton fx:id="rCPF" mnemonicParsing="false" text="CPF" />
+                              <RadioButton fx:id="rRG" mnemonicParsing="false" text="RG" />
+                              <RadioButton fx:id="rEstudante" mnemonicParsing="false" text="Carteira de Estudante" />
+                           </children>
+                        </VBox>
+                        <TextField fx:id="inputDocumento" prefHeight="25.0" prefWidth="153.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelCentral">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone:" />
+                        <TextField fx:id="inputTelefone" prefHeight="25.0" prefWidth="154.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
+                        <TextField fx:id="inputEmail" prefHeight="25.0" prefWidth="318.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelCentral">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status:" />
+                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <RadioButton fx:id="rAtivo" mnemonicParsing="false" text="Ativo" />
+                              <RadioButton fx:id="rInativo" mnemonicParsing="false" text="Inativo" />
+                              <RadioButton fx:id="rBloqueado" mnemonicParsing="false" text="Bloqueado" />
+                           </children>
+                        </VBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Motivo do bloqueio:" />
+                        <ChoiceBox fx:id="btMotivo" prefHeight="25.0" prefWidth="174.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelCentral">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rua:" />
+                        <TextField fx:id="inputRua" prefHeight="25.0" prefWidth="269.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bairro:" />
+                        <TextField fx:id="inputBairro" prefHeight="25.0" prefWidth="239.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelCentral">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cidade:" />
+                        <TextField fx:id="inputCidade" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UF:" />
+                        <TextField fx:id="inputUF" prefHeight="25.0" prefWidth="53.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CEP:" />
+                        <TextField fx:id="inputCEP" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children></Pane>
+   </center>
+   <bottom>
+      <HBox prefHeight="100.0" prefWidth="608.0" styleClass="painelBotoes" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btVoltar" mnemonicParsing="false" onAction="#chamarTelaInicial" styleClass="voltar" text="Voltar" />
+            <Button fx:id="btLimpar" mnemonicParsing="false" onAction="#limparCampos" styleClass="limpar" text="Limpar" />
+            <Button fx:id="btSalvar" mnemonicParsing="false" onAction="#salvarInformacoes" styleClass="salvar" text="Salvar" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

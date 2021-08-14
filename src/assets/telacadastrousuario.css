@@ -1,0 +1,58 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-color: #cccccc;
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+}
+
+.painelTitulo{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 0 0 2 0;
+    -fx-pref-height: 60;
+    -fx-alignment: center;
+}
+
+.painelBotoes{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 2 0 0 0;
+    -fx-pref-height: 60;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
+.painelCentral{
+    -fx-alignment: center_left;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+.button{
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-border-radius: 0;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-text-fill:#ffffff;
+}
+
+.button.salvar{
+    -fx-background-color:#00cc00
+}
+
+.button.voltar{
+    -fx-background-color:#0033ff
+}
+
+.button.limpar{
+    -fx-background-color:#cc0000
+}
+
+.titulo{
+    -fx-font-size: 25;
+    -fx-font-weight: bold;
+}
