@@ -5,20 +5,18 @@
  */
 package telaControles;
 
-import java.io.IOException;
+import CodigosGerais.Navegar;
+import entidades.Endereco;
+import entidades.Usuario;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
@@ -71,7 +69,9 @@ public class TelaCadastroUsuarioController implements Initializable {
     private Text textMotivo;
     @FXML
     private ChoiceBox<String> btUF;
-
+    
+    private ToggleGroup group1;
+    private ToggleGroup group;
     /**
      * Initializes the controller class.
      */
@@ -87,14 +87,14 @@ public class TelaCadastroUsuarioController implements Initializable {
             "MA", "MG", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "DF"));
         
         //Criando o grupo de radio para documentos
-        ToggleGroup group = new ToggleGroup();
+        group = new ToggleGroup();
         rCPF.setToggleGroup(group);
         rRG.setToggleGroup(group);
         rEstudante.setToggleGroup(group);
         rCPF.setSelected(true);
         
         //Criando o grupo de radio para causa de bloqueio
-        ToggleGroup group1 = new ToggleGroup();
+        group1 = new ToggleGroup();
         rAtivo.setToggleGroup(group1);
         rInativo.setToggleGroup(group1);
         rBloqueado.setToggleGroup(group1);
@@ -107,16 +107,7 @@ public class TelaCadastroUsuarioController implements Initializable {
 
     @FXML
     private void chamarTelaInicial(ActionEvent event) {
-        try {
-            Stage stage = null;
-            Parent newScene = null;
-            stage = (Stage) btVoltar.getScene().getWindow();
-            newScene = FXMLLoader.load(getClass().getClassLoader().getResource("./telas/TelaInicial.fxml"));
-            Scene scene = new Scene(newScene);
-            stage.setScene(scene);
-        } catch (IOException ex) {
-            System.out.println("Lamentavel");
-        }
+        Navegar temp = new Navegar("./telas/TelaInicial.fxml", (Stage) btVoltar.getScene().getWindow());
     }
 
     @FXML
@@ -128,6 +119,7 @@ public class TelaCadastroUsuarioController implements Initializable {
         inputEmail.clear();
         inputRua.clear();
         inputTelefone.clear();
+        inputDocumento.clear();
         textMotivo.setVisible(false);
         rCPF.setSelected(true);
         rAtivo.setSelected(true);
@@ -136,6 +128,29 @@ public class TelaCadastroUsuarioController implements Initializable {
 
     @FXML
     private void salvarInformacoes(ActionEvent event) {
+        try{
+            Usuario usuario = new Usuario();
+            Endereco endereco = new Endereco();
+            usuario.setNome(inputNome.getText());
+            usuario.setEmail(inputEmail.getText());
+            if (rBloqueado.isSelected())
+                usuario.setMotivo(btMotivo.getSelectionModel().getSelectedItem());
+            else
+                usuario.setMotivo(null);
+            RadioButton temp = (RadioButton) group.getSelectedToggle();
+            usuario.setTipoDoc(temp.getText());
+            usuario.setNumDoc(inputDocumento.getText());
+            usuario.setTelefone(inputTelefone.getText());
+            endereco.setBairro(inputBairro.getText());
+            endereco.setCep(inputCEP.getText());
+            endereco.setCidade(inputCidade.getText());
+            endereco.setRua(inputRua.getText());
+            endereco.setUf(btUF.getSelectionModel().getSelectedItem());
+            System.out.println(usuario);
+            System.out.println(endereco);
+        } catch(Exception e){
+            System.out.println("F");
+        }
     }
 
     @FXML

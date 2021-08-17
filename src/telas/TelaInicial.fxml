@@ -34,7 +34,7 @@
           <Menu mnemonicParsing="false" text="Cadastrar">
             <items>
               <MenuItem fx:id="menuCadastrarLivro" mnemonicParsing="false" onAction="#chamarCadastroLivro" text="Livro" />
-                  <MenuItem mnemonicParsing="false" text="Usuário" />
+                  <MenuItem mnemonicParsing="false" onAction="#chamarCadastrarUsuario" text="Usuário" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Empréstimo">

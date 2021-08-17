@@ -195,7 +195,8 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Usuario[ iDUsuario=" + iDUsuario + " ]";
+        return "entidades.Usuario[ iDUsuario=" + iDUsuario + " ]" + "\nNome " + this.nome + "\nTipoDoc " + this.tipoDoc + "\nNumDoc " + this.numDoc
+                + "\nStatus " + this.status + "\nMotivo " + this.motivo + "\nEmail " + this.email;
     }
     
 }

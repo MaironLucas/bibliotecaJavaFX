@@ -5,6 +5,7 @@
  */
 package telaControles;
 
+import CodigosGerais.Navegar;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -48,30 +49,12 @@ public class TelaInicialController implements Initializable {
 
     @FXML
     private void chamarCadastroLivro(ActionEvent event) {
-        try {
-            Stage stage = null;
-            Parent newScene = null;
-            stage = (Stage) btCadastrarLivro.getScene().getWindow();
-            newScene = FXMLLoader.load(getClass().getClassLoader().getResource("./telas/TelaCadastroLivro.fxml"));
-            Scene scene = new Scene(newScene);
-            stage.setScene(scene);
-        } catch (IOException ex) {
-            System.out.println("Lamentavel");
-        }
+        Navegar temp = new Navegar("./telas/TelaCadastroLivro.fxml", (Stage) btCadastrarLivro.getScene().getWindow());
     }
 
     @FXML
     private void chamarCadastrarUsuario(ActionEvent event) {
-        try {
-            Stage stage = null;
-            Parent newScene = null;
-            stage = (Stage) btCadastrarLivro.getScene().getWindow();
-            newScene = FXMLLoader.load(getClass().getClassLoader().getResource("./telas/TelaCadastroUsuario.fxml"));
-            Scene scene = new Scene(newScene);
-            stage.setScene(scene);
-        } catch (IOException ex) {
-            System.out.println("Lamentavel");
-        }
+        Navegar temp = new Navegar("./telas/TelaCadastroUsuario.fxml", (Stage) btCadastrarLivro.getScene().getWindow());
     }
     
 }
