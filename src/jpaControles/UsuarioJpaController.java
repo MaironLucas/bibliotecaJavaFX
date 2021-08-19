@@ -11,14 +11,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Endereco;
-import entidades.Emprestimo;
 import entidades.Usuario;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import jpaControles.exceptions.IllegalOrphanException;
 import jpaControles.exceptions.NonexistentEntityException;
 
 /**
@@ -37,9 +33,6 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public void create(Usuario usuario) {
-        if (usuario.getEmprestimoCollection() == null) {
-            usuario.setEmprestimoCollection(new ArrayList<Emprestimo>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -49,25 +42,10 @@ public class UsuarioJpaController implements Serializable {
                 IDEndereco = em.getReference(IDEndereco.getClass(), IDEndereco.getIDEndereco());
                 usuario.setIDEndereco(IDEndereco);
             }
-            Collection<Emprestimo> attachedEmprestimoCollection = new ArrayList<Emprestimo>();
-            for (Emprestimo emprestimoCollectionEmprestimoToAttach : usuario.getEmprestimoCollection()) {
-                emprestimoCollectionEmprestimoToAttach = em.getReference(emprestimoCollectionEmprestimoToAttach.getClass(), emprestimoCollectionEmprestimoToAttach.getIDEmprestimo());
-                attachedEmprestimoCollection.add(emprestimoCollectionEmprestimoToAttach);
-            }
-            usuario.setEmprestimoCollection(attachedEmprestimoCollection);
             em.persist(usuario);
             if (IDEndereco != null) {
                 IDEndereco.getUsuarioCollection().add(usuario);
                 IDEndereco = em.merge(IDEndereco);
-            }
-            for (Emprestimo emprestimoCollectionEmprestimo : usuario.getEmprestimoCollection()) {
-                Usuario oldIDUsuarioOfEmprestimoCollectionEmprestimo = emprestimoCollectionEmprestimo.getIDUsuario();
-                emprestimoCollectionEmprestimo.setIDUsuario(usuario);
-                emprestimoCollectionEmprestimo = em.merge(emprestimoCollectionEmprestimo);
-                if (oldIDUsuarioOfEmprestimoCollectionEmprestimo != null) {
-                    oldIDUsuarioOfEmprestimoCollectionEmprestimo.getEmprestimoCollection().remove(emprestimoCollectionEmprestimo);
-                    oldIDUsuarioOfEmprestimoCollectionEmprestimo = em.merge(oldIDUsuarioOfEmprestimoCollectionEmprestimo);
-                }
             }
             em.getTransaction().commit();
         } finally {
@@ -77,7 +55,7 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public void edit(Usuario usuario) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Usuario usuario) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -85,31 +63,10 @@ public class UsuarioJpaController implements Serializable {
             Usuario persistentUsuario = em.find(Usuario.class, usuario.getIDUsuario());
             Endereco IDEnderecoOld = persistentUsuario.getIDEndereco();
             Endereco IDEnderecoNew = usuario.getIDEndereco();
-            Collection<Emprestimo> emprestimoCollectionOld = persistentUsuario.getEmprestimoCollection();
-            Collection<Emprestimo> emprestimoCollectionNew = usuario.getEmprestimoCollection();
-            List<String> illegalOrphanMessages = null;
-            for (Emprestimo emprestimoCollectionOldEmprestimo : emprestimoCollectionOld) {
-                if (!emprestimoCollectionNew.contains(emprestimoCollectionOldEmprestimo)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Emprestimo " + emprestimoCollectionOldEmprestimo + " since its IDUsuario field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             if (IDEnderecoNew != null) {
                 IDEnderecoNew = em.getReference(IDEnderecoNew.getClass(), IDEnderecoNew.getIDEndereco());
                 usuario.setIDEndereco(IDEnderecoNew);
             }
-            Collection<Emprestimo> attachedEmprestimoCollectionNew = new ArrayList<Emprestimo>();
-            for (Emprestimo emprestimoCollectionNewEmprestimoToAttach : emprestimoCollectionNew) {
-                emprestimoCollectionNewEmprestimoToAttach = em.getReference(emprestimoCollectionNewEmprestimoToAttach.getClass(), emprestimoCollectionNewEmprestimoToAttach.getIDEmprestimo());
-                attachedEmprestimoCollectionNew.add(emprestimoCollectionNewEmprestimoToAttach);
-            }
-            emprestimoCollectionNew = attachedEmprestimoCollectionNew;
-            usuario.setEmprestimoCollection(emprestimoCollectionNew);
             usuario = em.merge(usuario);
             if (IDEnderecoOld != null && !IDEnderecoOld.equals(IDEnderecoNew)) {
                 IDEnderecoOld.getUsuarioCollection().remove(usuario);
@@ -118,17 +75,6 @@ public class UsuarioJpaController implements Serializable {
             if (IDEnderecoNew != null && !IDEnderecoNew.equals(IDEnderecoOld)) {
                 IDEnderecoNew.getUsuarioCollection().add(usuario);
                 IDEnderecoNew = em.merge(IDEnderecoNew);
-            }
-            for (Emprestimo emprestimoCollectionNewEmprestimo : emprestimoCollectionNew) {
-                if (!emprestimoCollectionOld.contains(emprestimoCollectionNewEmprestimo)) {
-                    Usuario oldIDUsuarioOfEmprestimoCollectionNewEmprestimo = emprestimoCollectionNewEmprestimo.getIDUsuario();
-                    emprestimoCollectionNewEmprestimo.setIDUsuario(usuario);
-                    emprestimoCollectionNewEmprestimo = em.merge(emprestimoCollectionNewEmprestimo);
-                    if (oldIDUsuarioOfEmprestimoCollectionNewEmprestimo != null && !oldIDUsuarioOfEmprestimoCollectionNewEmprestimo.equals(usuario)) {
-                        oldIDUsuarioOfEmprestimoCollectionNewEmprestimo.getEmprestimoCollection().remove(emprestimoCollectionNewEmprestimo);
-                        oldIDUsuarioOfEmprestimoCollectionNewEmprestimo = em.merge(oldIDUsuarioOfEmprestimoCollectionNewEmprestimo);
-                    }
-                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -147,7 +93,7 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -158,17 +104,6 @@ public class UsuarioJpaController implements Serializable {
                 usuario.getIDUsuario();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            Collection<Emprestimo> emprestimoCollectionOrphanCheck = usuario.getEmprestimoCollection();
-            for (Emprestimo emprestimoCollectionOrphanCheckEmprestimo : emprestimoCollectionOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Usuario (" + usuario + ") cannot be destroyed since the Emprestimo " + emprestimoCollectionOrphanCheckEmprestimo + " in its emprestimoCollection field has a non-nullable IDUsuario field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             Endereco IDEndereco = usuario.getIDEndereco();
             if (IDEndereco != null) {

@@ -6,9 +6,7 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -54,19 +51,18 @@ public class Usuario implements Serializable {
     private String numDoc;
     @Basic(optional = false)
     @Column(name = "TipoDoc")
-    private String tipoDoc;
+    private int tipoDoc;
     @Column(name = "Telefone")
     private String telefone;
+    @Basic(optional = false)
     @Column(name = "Status")
-    private Integer status;
+    private int status;
     @Column(name = "Email")
     private String email;
     @Column(name = "Motivo")
-    private String motivo;
+    private Integer motivo;
     @Column(name = "Foto")
     private String foto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iDUsuario")
-    private Collection<Emprestimo> emprestimoCollection;
     @JoinColumn(name = "IDEndereco", referencedColumnName = "IDEndereco")
     @ManyToOne
     private Endereco iDEndereco;
@@ -78,11 +74,12 @@ public class Usuario implements Serializable {
         this.iDUsuario = iDUsuario;
     }
 
-    public Usuario(Integer iDUsuario, String nome, String numDoc, String tipoDoc) {
+    public Usuario(Integer iDUsuario, String nome, String numDoc, int tipoDoc, int status) {
         this.iDUsuario = iDUsuario;
         this.nome = nome;
         this.numDoc = numDoc;
         this.tipoDoc = tipoDoc;
+        this.status = status;
     }
 
     public Integer getIDUsuario() {
@@ -109,11 +106,11 @@ public class Usuario implements Serializable {
         this.numDoc = numDoc;
     }
 
-    public String getTipoDoc() {
+    public int getTipoDoc() {
         return tipoDoc;
     }
 
-    public void setTipoDoc(String tipoDoc) {
+    public void setTipoDoc(int tipoDoc) {
         this.tipoDoc = tipoDoc;
     }
 
@@ -125,11 +122,11 @@ public class Usuario implements Serializable {
         this.telefone = telefone;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -141,11 +138,11 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public String getMotivo() {
+    public Integer getMotivo() {
         return motivo;
     }
 
-    public void setMotivo(String motivo) {
+    public void setMotivo(Integer motivo) {
         this.motivo = motivo;
     }
 
@@ -155,14 +152,6 @@ public class Usuario implements Serializable {
 
     public void setFoto(String foto) {
         this.foto = foto;
-    }
-
-    public Collection<Emprestimo> getEmprestimoCollection() {
-        return emprestimoCollection;
-    }
-
-    public void setEmprestimoCollection(Collection<Emprestimo> emprestimoCollection) {
-        this.emprestimoCollection = emprestimoCollection;
     }
 
     public Endereco getIDEndereco() {
@@ -195,8 +184,8 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Usuario[ iDUsuario=" + iDUsuario + " ]" + "\nNome " + this.nome + "\nTipoDoc " + this.tipoDoc + "\nNumDoc " + this.numDoc
-                + "\nStatus " + this.status + "\nMotivo " + this.motivo + "\nEmail " + this.email;
+        return "entidades.Usuario[ iDUsuario=" + iDUsuario + " ]" + "\nNome: " + nome + "\nTipoDoc: " + tipoDoc + "\nNumDoc: " + numDoc + 
+                "\nTelefone: " + telefone + "\nStatus: " + status + "\nMotivo: " + motivo + "\nEmail: " + email;
     }
     
 }

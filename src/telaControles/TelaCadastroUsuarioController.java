@@ -5,7 +5,12 @@
  */
 package telaControles;
 
+import CodigosGerais.DocumentoType;
+import CodigosGerais.MotivoType;
 import CodigosGerais.Navegar;
+import CodigosGerais.StatusType;
+import DAO.EnderecoDAO;
+import DAO.UsuarioDAO;
 import entidades.Endereco;
 import entidades.Usuario;
 import java.net.URL;
@@ -78,8 +83,8 @@ public class TelaCadastroUsuarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Populando a Choice Box de motivos
-        btMotivo.getItems().addAll(FXCollections.observableArrayList("Falta na entrega",
-            "Livro devolvido com defeito", "Problemas cadastrais"));
+        btMotivo.getItems().addAll(FXCollections.observableArrayList(MotivoType.FALTA.getDescription(),
+            MotivoType.LIVRO_DEFEITO.getDescription(), MotivoType.PROBLEMAS.getDescription()));
         
         //Populando choice box de UF
         btUF.getItems().addAll(FXCollections.observableArrayList("RS", "SC", "PR", "SP",
@@ -88,15 +93,33 @@ public class TelaCadastroUsuarioController implements Initializable {
         
         //Criando o grupo de radio para documentos
         group = new ToggleGroup();
+        
+        rCPF.setText(DocumentoType.CPF.getDescription());
+        rCPF.setUserData(DocumentoType.CPF);
         rCPF.setToggleGroup(group);
+        
+        rRG.setText(DocumentoType.RG.getDescription());
+        rRG.setUserData(DocumentoType.RG);
         rRG.setToggleGroup(group);
+        
+        rEstudante.setText(DocumentoType.CEST.getDescription());
+        rEstudante.setUserData(DocumentoType.CEST);
         rEstudante.setToggleGroup(group);
+        
         rCPF.setSelected(true);
         
         //Criando o grupo de radio para causa de bloqueio
         group1 = new ToggleGroup();
+        rAtivo.setText(StatusType.ATIVO.getDescription());
+        rAtivo.setUserData(StatusType.ATIVO);
         rAtivo.setToggleGroup(group1);
+        
+        rInativo.setText(StatusType.INATIVO.getDescription());
+        rInativo.setUserData(StatusType.INATIVO);
         rInativo.setToggleGroup(group1);
+        
+        rBloqueado.setText(StatusType.BLOQUEADO.getDescription());
+        rBloqueado.setUserData(StatusType.BLOQUEADO);
         rBloqueado.setToggleGroup(group1);
         rAtivo.setSelected(true);
         
@@ -112,6 +135,7 @@ public class TelaCadastroUsuarioController implements Initializable {
 
     @FXML
     private void limparCampos(ActionEvent event) {
+        //Limpa os campos de input
         inputNome.clear();
         inputBairro.clear();
         inputCEP.clear();
@@ -133,14 +157,23 @@ public class TelaCadastroUsuarioController implements Initializable {
             Endereco endereco = new Endereco();
             usuario.setNome(inputNome.getText());
             usuario.setEmail(inputEmail.getText());
-            if (rBloqueado.isSelected())
-                usuario.setMotivo(btMotivo.getSelectionModel().getSelectedItem());
-            else
+            if (rBloqueado.isSelected()){
+                String descricaoBotao = btMotivo.getSelectionModel().getSelectedItem();
+                switch (descricaoBotao){
+                    case "Falta na entrega":usuario.setMotivo(1);break;
+                    case "Livro devolvido com defeito":usuario.setMotivo(2);break;
+                    case "Problemas cadastrais":usuario.setMotivo(3);break;
+                }
+            } else {
                 usuario.setMotivo(null);
-            RadioButton temp = (RadioButton) group.getSelectedToggle();
-            usuario.setTipoDoc(temp.getText());
+            }
+            
             usuario.setNumDoc(inputDocumento.getText());
+            DocumentoType tipoDocTemp = (DocumentoType) group.getSelectedToggle().getUserData();
+            usuario.setTipoDoc(tipoDocTemp.getIndex());
             usuario.setTelefone(inputTelefone.getText());
+            StatusType statusTemp = (StatusType) group1.getSelectedToggle().getUserData();
+            usuario.setStatus(statusTemp.getIndex());
             endereco.setBairro(inputBairro.getText());
             endereco.setCep(inputCEP.getText());
             endereco.setCidade(inputCidade.getText());
@@ -148,8 +181,12 @@ public class TelaCadastroUsuarioController implements Initializable {
             endereco.setUf(btUF.getSelectionModel().getSelectedItem());
             System.out.println(usuario);
             System.out.println(endereco);
+            //UsuarioDAO usuarioPersist = new UsuarioDAO();
+            //usuarioPersist.add(usuario);
+            EnderecoDAO enderecoPersist = new EnderecoDAO();
+            enderecoPersist.add(endereco);  
         } catch(Exception e){
-            System.out.println("F");
+            System.out.println(e.getMessage());
         }
     }
 
