@@ -5,20 +5,21 @@
  */
 package telaControles;
 
+import CodigosGerais.CaixaDeAlerta;
 import CodigosGerais.DocumentoType;
 import CodigosGerais.MotivoType;
 import CodigosGerais.Navegar;
 import CodigosGerais.StatusType;
-import DAO.EnderecoDAO;
 import DAO.UsuarioDAO;
-import entidades.Endereco;
 import entidades.Usuario;
+import exceptions.ExceptionGenerica;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
@@ -77,6 +78,8 @@ public class TelaCadastroUsuarioController implements Initializable {
     
     private ToggleGroup group1;
     private ToggleGroup group;
+    @FXML
+    private TextField inputNumero;
     /**
      * Initializes the controller class.
      */
@@ -126,6 +129,7 @@ public class TelaCadastroUsuarioController implements Initializable {
         //Deixando seleção de motivo invisivel
         textMotivo.setVisible(false);
         btMotivo.setVisible(false);
+        
     }    
 
     @FXML
@@ -144,6 +148,7 @@ public class TelaCadastroUsuarioController implements Initializable {
         inputRua.clear();
         inputTelefone.clear();
         inputDocumento.clear();
+        inputNumero.clear();
         textMotivo.setVisible(false);
         rCPF.setSelected(true);
         rAtivo.setSelected(true);
@@ -152,9 +157,9 @@ public class TelaCadastroUsuarioController implements Initializable {
 
     @FXML
     private void salvarInformacoes(ActionEvent event) {
+        Usuario usuario = new Usuario();
+        boolean controle = false;
         try{
-            Usuario usuario = new Usuario();
-            Endereco endereco = new Endereco();
             usuario.setNome(inputNome.getText());
             usuario.setEmail(inputEmail.getText());
             if (rBloqueado.isSelected()){
@@ -167,26 +172,31 @@ public class TelaCadastroUsuarioController implements Initializable {
             } else {
                 usuario.setMotivo(null);
             }
-            
             usuario.setNumDoc(inputDocumento.getText());
             DocumentoType tipoDocTemp = (DocumentoType) group.getSelectedToggle().getUserData();
             usuario.setTipoDoc(tipoDocTemp.getIndex());
             usuario.setTelefone(inputTelefone.getText());
             StatusType statusTemp = (StatusType) group1.getSelectedToggle().getUserData();
             usuario.setStatus(statusTemp.getIndex());
-            endereco.setBairro(inputBairro.getText());
-            endereco.setCep(inputCEP.getText());
-            endereco.setCidade(inputCidade.getText());
-            endereco.setRua(inputRua.getText());
-            endereco.setUf(btUF.getSelectionModel().getSelectedItem());
+            usuario.setBairro(inputBairro.getText());
+            usuario.setCep(inputCEP.getText());
+            usuario.setCidade(inputCidade.getText());
+            usuario.setRua(inputRua.getText());
+            usuario.setNumero(inputNumero.getText());
+            usuario.setUf(btUF.getSelectionModel().getSelectedItem());
             System.out.println(usuario);
-            System.out.println(endereco);
-            //UsuarioDAO usuarioPersist = new UsuarioDAO();
-            //usuarioPersist.add(usuario);
-            EnderecoDAO enderecoPersist = new EnderecoDAO();
-            enderecoPersist.add(endereco);  
-        } catch(Exception e){
-            System.out.println(e.getMessage());
+            controle = true;  
+        } catch(ExceptionGenerica e){
+            new CaixaDeAlerta(Alert.AlertType.ERROR, "Falha no input", e.getMessage());
+        }
+        
+        if (controle){
+            try{
+                UsuarioDAO usuarioPersist = new UsuarioDAO();
+                usuarioPersist.add(usuario);
+            } catch (Exception e){
+                new CaixaDeAlerta(Alert.AlertType.ERROR, "Erro", e.getMessage());
+            }
         }
     }
 

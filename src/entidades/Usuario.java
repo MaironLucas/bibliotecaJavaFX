@@ -5,6 +5,7 @@
  */
 package entidades;
 
+import exceptions.ExceptionGenerica;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -12,8 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -34,7 +33,13 @@ import javax.persistence.Table;
     @NamedQuery(name = "Usuario.findByStatus", query = "SELECT u FROM Usuario u WHERE u.status = :status"),
     @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
     @NamedQuery(name = "Usuario.findByMotivo", query = "SELECT u FROM Usuario u WHERE u.motivo = :motivo"),
-    @NamedQuery(name = "Usuario.findByFoto", query = "SELECT u FROM Usuario u WHERE u.foto = :foto")})
+    @NamedQuery(name = "Usuario.findByFoto", query = "SELECT u FROM Usuario u WHERE u.foto = :foto"),
+    @NamedQuery(name = "Usuario.findByCidade", query = "SELECT u FROM Usuario u WHERE u.cidade = :cidade"),
+    @NamedQuery(name = "Usuario.findByUf", query = "SELECT u FROM Usuario u WHERE u.uf = :uf"),
+    @NamedQuery(name = "Usuario.findByCep", query = "SELECT u FROM Usuario u WHERE u.cep = :cep"),
+    @NamedQuery(name = "Usuario.findByRua", query = "SELECT u FROM Usuario u WHERE u.rua = :rua"),
+    @NamedQuery(name = "Usuario.findByBairro", query = "SELECT u FROM Usuario u WHERE u.bairro = :bairro"),
+    @NamedQuery(name = "Usuario.findByNumero", query = "SELECT u FROM Usuario u WHERE u.numero = :numero")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,9 +68,18 @@ public class Usuario implements Serializable {
     private Integer motivo;
     @Column(name = "Foto")
     private String foto;
-    @JoinColumn(name = "IDEndereco", referencedColumnName = "IDEndereco")
-    @ManyToOne
-    private Endereco iDEndereco;
+    @Column(name = "Cidade")
+    private String cidade;
+    @Column(name = "UF")
+    private String uf;
+    @Column(name = "CEP")
+    private String cep;
+    @Column(name = "Rua")
+    private String rua;
+    @Column(name = "Bairro")
+    private String bairro;
+    @Column(name = "Numero")
+    private String numero;
 
     public Usuario() {
     }
@@ -94,16 +108,28 @@ public class Usuario implements Serializable {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String nome) throws ExceptionGenerica{
+        if (nome.isBlank() || nome.isEmpty())
+            throw new ExceptionGenerica("Campo nome não informado!");
+        else
+            this.nome = nome;
     }
 
     public String getNumDoc() {
         return numDoc;
     }
 
-    public void setNumDoc(String numDoc) {
-        this.numDoc = numDoc;
+    public void setNumDoc(String numDoc) throws ExceptionGenerica{
+        if (numDoc.isBlank() || numDoc.isEmpty())
+            throw new ExceptionGenerica("Número de documento não foi informado!");
+        else{
+            try{
+                int temp = Integer.parseInt(numDoc);
+                this.numDoc = numDoc;
+            } catch (NumberFormatException e){
+                throw new ExceptionGenerica("Número de documento só aceita números!");
+            }
+        }
     }
 
     public int getTipoDoc() {
@@ -118,8 +144,17 @@ public class Usuario implements Serializable {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefone(String telefone) throws ExceptionGenerica{
+        if (telefone.isBlank() || telefone.isEmpty())
+            throw new ExceptionGenerica("Telefone não foi informado!");
+        else{
+            try{
+                int temp = Integer.parseInt(telefone);
+                this.telefone = telefone;
+            } catch (NumberFormatException e){
+                throw new ExceptionGenerica("Telefone só aceita números!");
+            }
+        } 
     }
 
     public int getStatus() {
@@ -154,12 +189,73 @@ public class Usuario implements Serializable {
         this.foto = foto;
     }
 
-    public Endereco getIDEndereco() {
-        return iDEndereco;
+    public String getCidade() {
+        return cidade;
     }
 
-    public void setIDEndereco(Endereco iDEndereco) {
-        this.iDEndereco = iDEndereco;
+    public void setCidade(String cidade) throws ExceptionGenerica{
+        if(cidade.isBlank() || cidade.isEmpty())
+            throw new ExceptionGenerica("Cidade precisa ser informada!");
+        else
+            this.cidade = cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) throws ExceptionGenerica{
+        if(cep.isBlank() || cep.isEmpty())
+            throw new ExceptionGenerica("CEP precisa ser informado!");
+        else
+            this.cep = cep;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) throws ExceptionGenerica{
+        if(rua.isBlank() || rua.isEmpty())
+            throw new ExceptionGenerica("Rua precisa ser informada!");
+        else
+            this.rua = rua;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) throws ExceptionGenerica{
+        if(bairro.isBlank() || bairro.isEmpty())
+            throw new ExceptionGenerica("Bairro precisa ser informado!");
+        else
+            this.bairro = bairro;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) throws ExceptionGenerica{
+        if(numero.isBlank() || numero.isEmpty())
+            throw new ExceptionGenerica("Numero precisa ser informado!");
+        else{
+            try{
+                int temp = Integer.parseInt(numero);
+                this.numero = numero;
+            } catch (NumberFormatException e){
+                throw new ExceptionGenerica("Numero não pode conter caracteres!");
+            }
+        }    
     }
 
     @Override
@@ -184,8 +280,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Usuario[ iDUsuario=" + iDUsuario + " ]" + "\nNome: " + nome + "\nTipoDoc: " + tipoDoc + "\nNumDoc: " + numDoc + 
-                "\nTelefone: " + telefone + "\nStatus: " + status + "\nMotivo: " + motivo + "\nEmail: " + email;
+        return "entidades.Usuario[ iDUsuario=" + iDUsuario + " ]";
     }
     
 }

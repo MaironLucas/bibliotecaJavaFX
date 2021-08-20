@@ -5,6 +5,7 @@
  */
 package entidades;
 
+import exceptions.ExceptionGenerica;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -90,40 +91,66 @@ public class Livro implements Serializable {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitulo(String titulo) throws ExceptionGenerica{
+        if (titulo.isBlank() || titulo.isEmpty())
+            throw new ExceptionGenerica("Titulo deve ser informado!");
+        else
+            this.titulo = titulo;
     }
 
     public String getCapa() {
         return capa;
     }
 
-    public void setCapa(String capa) {
-        this.capa = capa;
+    public void setCapa(String capa) throws ExceptionGenerica{
+        if (capa == null){
+            throw new ExceptionGenerica("Imagem de capa deve ser informada!");
+        } else{
+            if (capa.isBlank() || capa.isEmpty())
+                throw new ExceptionGenerica("Imagem de capa deve ser informada!");
+            else
+                this.capa = capa;
+        }
     }
 
     public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setIsbn(String isbn) throws ExceptionGenerica{
+        if (isbn.isBlank() || isbn.isEmpty())
+            throw new ExceptionGenerica("Código ISBN deve ser informado!");
+        else{
+            try{
+                Integer temp = Integer.parseInt(isbn);
+                this.isbn = isbn;
+            } catch (NumberFormatException e){
+                throw new ExceptionGenerica("Código ISBN só aceita números!");
+            }
+        }
+        
     }
 
     public String getAutores() {
         return autores;
     }
 
-    public void setAutores(String autores) {
-        this.autores = autores;
+    public void setAutores(String autores) throws ExceptionGenerica{
+        if (autores.isEmpty() || autores.isBlank())
+            throw new ExceptionGenerica("O nome do(s) autor(es) deve ser informado!");
+        else
+            this.autores = autores;
     }
 
     public int getQtdexemplares() {
         return qtdexemplares;
     }
 
-    public void setQtdexemplares(int qtdexemplares) {
-        this.qtdexemplares = qtdexemplares;
+    public void setQtdexemplares(int qtdexemplares) throws ExceptionGenerica{
+        if (qtdexemplares > 0)
+            this.qtdexemplares = qtdexemplares;
+        else
+            throw new ExceptionGenerica("Quantidade deve ser superior a zero!");
     }
 
     public int getQtdemprestados() {

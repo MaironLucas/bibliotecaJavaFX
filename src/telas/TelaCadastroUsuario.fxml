@@ -28,6 +28,12 @@
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" />
                         <TextField fx:id="inputNome" prefHeight="25.0" prefWidth="299.0" promptText="Obrigatório" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone:" />
+                        <TextField fx:id="inputTelefone" prefHeight="25.0" prefWidth="154.0" promptText="Obrigatório" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelCentral">
+                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Documento:" />
                         <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="142.0">
                            <children>
@@ -36,19 +42,14 @@
                               <RadioButton fx:id="rEstudante" mnemonicParsing="false" text="Carteira de Estudante" />
                            </children>
                         </VBox>
-                        <TextField fx:id="inputDocumento" prefHeight="25.0" prefWidth="153.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="n*:" />
+                        <TextField fx:id="inputDocumento" prefHeight="25.0" prefWidth="153.0" promptText="Obrigatório" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelCentral">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone:" />
-                        <TextField fx:id="inputTelefone" prefHeight="25.0" prefWidth="154.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
                         <TextField fx:id="inputEmail" prefHeight="25.0" prefWidth="318.0" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelCentral">
-                     <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status:" />
                         <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                            <children>
@@ -64,19 +65,21 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelCentral">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rua:" />
-                        <TextField fx:id="inputRua" prefHeight="25.0" prefWidth="269.0" />
+                        <TextField fx:id="inputRua" prefHeight="25.0" prefWidth="269.0" promptText="Obrigatório" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bairro:" />
-                        <TextField fx:id="inputBairro" prefHeight="25.0" prefWidth="239.0" />
+                        <TextField fx:id="inputBairro" prefHeight="25.0" prefWidth="239.0" promptText="Obrigatório" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Número:" />
+                        <TextField fx:id="inputNumero" prefHeight="25.0" prefWidth="62.0" promptText="Obrigatório" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelCentral">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cidade:" />
-                        <TextField fx:id="inputCidade" />
+                        <TextField fx:id="inputCidade" promptText="Obrigatório" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="UF:" />
                         <ChoiceBox fx:id="btUF" prefHeight="25.0" prefWidth="46.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CEP:" />
-                        <TextField fx:id="inputCEP" />
+                        <TextField fx:id="inputCEP" promptText="Obrigatório" />
                      </children>
                   </HBox>
                </children>

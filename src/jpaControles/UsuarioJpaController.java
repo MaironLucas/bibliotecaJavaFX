@@ -5,16 +5,15 @@
  */
 package jpaControles;
 
+import entidades.Usuario;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import entidades.Endereco;
-import entidades.Usuario;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import jpaControles.exceptions.NonexistentEntityException;
 
 /**
@@ -37,16 +36,7 @@ public class UsuarioJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Endereco IDEndereco = usuario.getIDEndereco();
-            if (IDEndereco != null) {
-                IDEndereco = em.getReference(IDEndereco.getClass(), IDEndereco.getIDEndereco());
-                usuario.setIDEndereco(IDEndereco);
-            }
             em.persist(usuario);
-            if (IDEndereco != null) {
-                IDEndereco.getUsuarioCollection().add(usuario);
-                IDEndereco = em.merge(IDEndereco);
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -60,22 +50,7 @@ public class UsuarioJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Usuario persistentUsuario = em.find(Usuario.class, usuario.getIDUsuario());
-            Endereco IDEnderecoOld = persistentUsuario.getIDEndereco();
-            Endereco IDEnderecoNew = usuario.getIDEndereco();
-            if (IDEnderecoNew != null) {
-                IDEnderecoNew = em.getReference(IDEnderecoNew.getClass(), IDEnderecoNew.getIDEndereco());
-                usuario.setIDEndereco(IDEnderecoNew);
-            }
             usuario = em.merge(usuario);
-            if (IDEnderecoOld != null && !IDEnderecoOld.equals(IDEnderecoNew)) {
-                IDEnderecoOld.getUsuarioCollection().remove(usuario);
-                IDEnderecoOld = em.merge(IDEnderecoOld);
-            }
-            if (IDEnderecoNew != null && !IDEnderecoNew.equals(IDEnderecoOld)) {
-                IDEnderecoNew.getUsuarioCollection().add(usuario);
-                IDEnderecoNew = em.merge(IDEnderecoNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -104,11 +79,6 @@ public class UsuarioJpaController implements Serializable {
                 usuario.getIDUsuario();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
-            }
-            Endereco IDEndereco = usuario.getIDEndereco();
-            if (IDEndereco != null) {
-                IDEndereco.getUsuarioCollection().remove(usuario);
-                IDEndereco = em.merge(IDEndereco);
             }
             em.remove(usuario);
             em.getTransaction().commit();
