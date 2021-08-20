@@ -16,7 +16,7 @@
          <children>
             <Button fx:id="btVoltar" mnemonicParsing="false" onAction="#chamarTelaInicial" styleClass="voltar" text="Voltar" />
             <Button mnemonicParsing="false" onAction="#limparCampos" styleClass="limpar" text="Limpar" />
-            <Button fx:id="btnAvancar" mnemonicParsing="false" onAction="#salvarLivro" styleClass="salvar" text="Avancar" />
+            <Button fx:id="btnAvancar" mnemonicParsing="false" onAction="#avancarParaLivro" styleClass="salvar" text="Avancar" />
          </children>
       </HBox>
    </bottom>

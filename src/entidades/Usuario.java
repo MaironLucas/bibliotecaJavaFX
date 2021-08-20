@@ -124,7 +124,7 @@ public class Usuario implements Serializable {
             throw new ExceptionGenerica("Número de documento não foi informado!");
         else{
             try{
-                int temp = Integer.parseInt(numDoc);
+                Long temp = Long.parseLong(numDoc);
                 this.numDoc = numDoc;
             } catch (NumberFormatException e){
                 throw new ExceptionGenerica("Número de documento só aceita números!");
@@ -149,7 +149,7 @@ public class Usuario implements Serializable {
             throw new ExceptionGenerica("Telefone não foi informado!");
         else{
             try{
-                int temp = Integer.parseInt(telefone);
+                Long temp = Long.parseLong(telefone);
                 this.telefone = telefone;
             } catch (NumberFormatException e){
                 throw new ExceptionGenerica("Telefone só aceita números!");
@@ -250,7 +250,7 @@ public class Usuario implements Serializable {
             throw new ExceptionGenerica("Numero precisa ser informado!");
         else{
             try{
-                int temp = Integer.parseInt(numero);
+                Long temp = Long.parseLong(numero);
                 this.numero = numero;
             } catch (NumberFormatException e){
                 throw new ExceptionGenerica("Numero não pode conter caracteres!");

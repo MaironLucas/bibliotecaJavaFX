@@ -5,8 +5,11 @@
  */
 package telaControles;
 
+import CodigosGerais.CaixaDeAlerta;
+import CodigosGerais.MudarCena;
 import DAO.UsuarioDAO;
 import entidades.Usuario;
+import exceptions.ExceptionGenerica;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -14,12 +17,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -47,6 +54,8 @@ public class TelaEmprestimoController implements Initializable {
     @FXML
     private TableColumn<Usuario, String> telefoneCol;
 
+    private UsuarioDAO usuarioDao;
+    
     /**
      * Initializes the controller class.
      */
@@ -57,11 +66,6 @@ public class TelaEmprestimoController implements Initializable {
         tipoDocCol.setCellValueFactory(new PropertyValueFactory<>("tipoDoc"));
         numeroDocCol.setCellValueFactory(new PropertyValueFactory<>("numDoc"));
         telefoneCol.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-        
-        UsuarioDAO usuariodao = new UsuarioDAO();
-        ObservableList<Usuario> listaDeUsuarios = FXCollections.observableArrayList();
-        listaDeUsuarios.addAll(usuariodao.getByNome("Mairon"));
-        tabelaDeUsuarios.setItems(listaDeUsuarios);
     }    
 
     @FXML
@@ -73,13 +77,26 @@ public class TelaEmprestimoController implements Initializable {
     private void limparCampos(ActionEvent event) {
     }
 
-    @FXML
-    private void salvarLivro(ActionEvent event) {
-    }
 
     @FXML
     private void buscarUsuarios(ActionEvent event) {
-        
+        UsuarioDAO usuarioDao = new UsuarioDAO();
+        ObservableList<Usuario> listaDeUsuarios = FXCollections.observableArrayList();
+        listaDeUsuarios.addAll(usuarioDao.getByNumDoc(inputBusca.getText()));
+        listaDeUsuarios.addAll(usuarioDao.getByNome(inputBusca.getText()));
+        tabelaDeUsuarios.setItems(listaDeUsuarios);
     }
-    
+
+    @FXML
+    private void avancarParaLivro(ActionEvent event) {
+        Usuario usuarioSel = tabelaDeUsuarios.getSelectionModel().getSelectedItem();
+        if (usuarioSel == null){
+            new CaixaDeAlerta(Alert.AlertType.ERROR, "Falha de inserção", "Um usuário deve ser selecionado!");
+        } else{
+            BorderPane root = (BorderPane) btVoltar.getScene().getRoot();
+            //root.setUserData(usuarioSel);
+            new MudarCena("./telas/TelaEmprestimo2.fxml", root);
+        }
+    }
+   
 }
