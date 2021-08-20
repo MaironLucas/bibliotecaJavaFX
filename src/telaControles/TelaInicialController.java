@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -42,6 +43,8 @@ public class TelaInicialController implements Initializable {
     private MenuItem menuEditarLivro;
     @FXML
     private MenuItem menuEditarUsuario;
+    @FXML
+    private Menu menuInicio;
 
     /**
      * Initializes the controller class.
@@ -69,5 +72,10 @@ public class TelaInicialController implements Initializable {
     @FXML
     private void chamaEditarLivro(ActionEvent event) {
         new MudarCena("./telas/TelaEditarLivro.fxml", root);
+    }
+
+    @FXML
+    private void chamarEditarUsuario(ActionEvent event) {
+        new MudarCena("./telas/TelaEditarUsuario.fxml", root);
     }
 }
