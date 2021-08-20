@@ -45,6 +45,8 @@ public class TelaInicialController implements Initializable {
     private MenuItem menuEditarUsuario;
     @FXML
     private Menu menuInicio;
+    @FXML
+    private Menu menuRelatorio;
 
     /**
      * Initializes the controller class.
@@ -77,5 +79,9 @@ public class TelaInicialController implements Initializable {
     @FXML
     private void chamarEditarUsuario(ActionEvent event) {
         new MudarCena("./telas/TelaEditarUsuario.fxml", root);
+    }
+
+    @FXML
+    private void chamarTelaRelatorio(ActionEvent event) {
     }
 }

@@ -1,0 +1,22 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-color: #cccccc;
+    -fx-pref-width: 763;
+    -fx-pref-height: 452;
+}
+
+.painelTitulo{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 0 0 2 0;
+    -fx-pref-height: 40;
+    -fx-alignment: center;
+}
+
+.painelView{
+    -fx-background-color: #cccccc;
+    -fx-padding:0 30 10 30;
+}
