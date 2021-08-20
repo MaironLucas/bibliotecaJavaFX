@@ -14,7 +14,7 @@
     -fx-border-width: 0 0 2 0;
 }
 
-.button{
+.button-inicial{
     -fx-font-weight: bold;
     -fx-pref-height: 100px;
     -fx-pref-width: 145px;

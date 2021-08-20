@@ -5,18 +5,16 @@
  */
 package telaControles;
 
+import CodigosGerais.MudarCena;
 import CodigosGerais.Navegar;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -38,6 +36,8 @@ public class TelaInicialController implements Initializable {
     private Button btDevolver;
     @FXML
     private MenuItem menuCadastrarLivro;
+    @FXML
+    private BorderPane root;
 
     /**
      * Initializes the controller class.
@@ -49,12 +49,17 @@ public class TelaInicialController implements Initializable {
 
     @FXML
     private void chamarCadastroLivro(ActionEvent event) {
-        Navegar temp = new Navegar("./telas/TelaCadastroLivro.fxml", (Stage) btCadastrarLivro.getScene().getWindow());
+        Navegar temp = new Navegar("./telas/TelaCadastroLivro.fxml", (Stage) root.getScene().getWindow());
     }
 
     @FXML
     private void chamarCadastrarUsuario(ActionEvent event) {
-        Navegar temp = new Navegar("./telas/TelaCadastroUsuario.fxml", (Stage) btCadastrarLivro.getScene().getWindow());
+        Navegar temp = new Navegar("./telas/TelaCadastroUsuario.fxml", (Stage) root.getScene().getWindow());
+    }
+
+    @FXML
+    private void chamarEmprestarLivro(ActionEvent event) {
+        new MudarCena("./telas/TelaEmprestimo.fxml", root);
     }
     
 }

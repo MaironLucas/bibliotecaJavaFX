@@ -1,0 +1,12 @@
+public TurmaCatequizandos findDadosCatequizando(Catequizando idCatequizando, Turma idTurma){
+EntityManager em = getEntityManager();
+try {
+CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+Query q = em.createNamedQuery("TurmaCatequizandos.findByCatequizandoAtual", TurmaCatequizandos.class);//em.createQuery(cq);
+q.setParameter("idCatequizando", idCatequizando);
+q.setParameter("idTurma", idTurma);
+return (TurmaCatequizandos) q.getSingleResult();
+} finally {
+em.close();
+}
+}
