@@ -43,6 +43,14 @@ public class UsuarioDAO {
         return objetoJPA.findUsuarioEntities();
     }
     
+    public List<Usuario> getByNome(String nome){
+        return objetoJPA.findByNome(nome);
+    }
+    
+    public List<Usuario> getByNumDoc(String numDoc){
+        return objetoJPA.findByNumDoc(numDoc);
+    }
+    
     public void persist(Usuario objeto){
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

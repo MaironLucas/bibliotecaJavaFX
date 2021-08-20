@@ -135,4 +135,27 @@ public class UsuarioJpaController implements Serializable {
         }
     }
     
+    public List<Usuario> findByNome(String nome){
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Query q = em.createNamedQuery("Usuario.findByNome", Usuario.class);//em.createQuery(cq);
+            q.setParameter("nome", "%" + nome + "%");
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Usuario> findByNumDoc(String numDoc){
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Query q = em.createNamedQuery("Usuario.findByNumDoc", Usuario.class);//em.createQuery(cq);
+            q.setParameter("numDoc", numDoc);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

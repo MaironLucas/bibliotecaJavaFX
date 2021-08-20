@@ -5,16 +5,21 @@
  */
 package telaControles;
 
+import DAO.UsuarioDAO;
 import entidades.Usuario;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -30,19 +35,33 @@ public class TelaEmprestimoController implements Initializable {
     @FXML
     private TextField inputBusca;
     @FXML
-    private ListView<?> tabelaDeUsuarios;
+    private TableView<Usuario> tabelaDeUsuarios;
+    @FXML
+    private TableColumn<Usuario, String> fotoCol;
+    @FXML
+    private TableColumn<Usuario, String> nomeCol;
+    @FXML
+    private TableColumn<Usuario, String> tipoDocCol;
+    @FXML
+    private TableColumn<Usuario, String> numeroDocCol;
+    @FXML
+    private TableColumn<Usuario, String> telefoneCol;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        TableColumn nameCol = new TableColumn("Nome");
-        TableColumn tipoDocCol = new TableColumn("Tipo de Doc");
-        TableColumn numDocCol = new TableColumn("Número Doc");
-        TableColumn telefoneCol = new TableColumn("Telefone");
-        TableColumn fotoCol = new TableColumn("Foto");
+        fotoCol.setCellValueFactory(new PropertyValueFactory<>("foto"));
+        nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        tipoDocCol.setCellValueFactory(new PropertyValueFactory<>("tipoDoc"));
+        numeroDocCol.setCellValueFactory(new PropertyValueFactory<>("numDoc"));
+        telefoneCol.setCellValueFactory(new PropertyValueFactory<>("telefone"));
         
+        UsuarioDAO usuariodao = new UsuarioDAO();
+        ObservableList<Usuario> listaDeUsuarios = FXCollections.observableArrayList();
+        listaDeUsuarios.addAll(usuariodao.getByNome("Mairon"));
+        tabelaDeUsuarios.setItems(listaDeUsuarios);
     }    
 
     @FXML
@@ -60,6 +79,7 @@ public class TelaEmprestimoController implements Initializable {
 
     @FXML
     private void buscarUsuarios(ActionEvent event) {
+        
     }
     
 }
