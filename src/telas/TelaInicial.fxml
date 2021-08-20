@@ -37,6 +37,12 @@
                   <MenuItem mnemonicParsing="false" onAction="#chamarCadastrarUsuario" text="Usuário" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Editar">
+              <items>
+                <MenuItem fx:id="menuEditarLivro" mnemonicParsing="false" onAction="#chamaEditarLivro" text="Livro" />
+                  <MenuItem fx:id="menuEditarUsuario" mnemonicParsing="false" text="Usuário" />
+              </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Empréstimo">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#chamarEmprestarLivro" text="Novo" />

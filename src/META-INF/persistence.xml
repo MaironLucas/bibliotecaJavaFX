@@ -7,10 +7,10 @@
     <class>entidades.Livro</class>
     <class>entidades.Emprestimo</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/loo?serverTimezone=UTC"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/loo?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="anjtmai9810"/>
+      <property name="javax.persistence.jdbc.password" value="123456"/>
     </properties>
   </persistence-unit>
 </persistence>

@@ -38,6 +38,10 @@ public class TelaInicialController implements Initializable {
     private MenuItem menuCadastrarLivro;
     @FXML
     private BorderPane root;
+    @FXML
+    private MenuItem menuEditarLivro;
+    @FXML
+    private MenuItem menuEditarUsuario;
 
     /**
      * Initializes the controller class.
@@ -62,4 +66,8 @@ public class TelaInicialController implements Initializable {
         new MudarCena("./telas/TelaEmprestimo.fxml", root);
     }
     
+    @FXML
+    private void chamaEditarLivro(ActionEvent event) {
+        new MudarCena("./telas/TelaEditarLivro.fxml", root);
+    }
 }
