@@ -83,5 +83,6 @@ public class TelaInicialController implements Initializable {
 
     @FXML
     private void chamarTelaRelatorio(ActionEvent event) {
+        new MudarCena("./telas/TelaRelatorio.fxml", root);
     }
 }
