@@ -15,3 +15,21 @@
     -fx-pref-height: 40;
     -fx-alignment: center;
 }
+
+.painelBusca {
+    -fx-alignment: center_left;
+    -fx-padding: 30 0 30 30;
+    -fx-spacing: 10;
+    -fx-pref-height: 40;
+}
+
+.painelUsuario {
+    -fx-alignment: center_left;
+    -fx-padding: 0 0 0 30;
+    -fx-pref-height: 40;
+}
+
+.painelView{
+    -fx-background-color: #cccccc;
+    -fx-padding:0 30 10 30;
+}

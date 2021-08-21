@@ -8,8 +8,8 @@ package telaControles;
 import CodigosGerais.CaixaDeAlerta;
 import CodigosGerais.MudarCena;
 import DAO.UsuarioDAO;
+import dataController.EmprestimoDataHolder;
 import entidades.Usuario;
-import exceptions.ExceptionGenerica;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -17,16 +17,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -94,7 +91,9 @@ public class TelaEmprestimoController implements Initializable {
             new CaixaDeAlerta(Alert.AlertType.ERROR, "Falha de inserção", "Um usuário deve ser selecionado!");
         } else{
             BorderPane root = (BorderPane) btVoltar.getScene().getRoot();
-            //root.setUserData(usuarioSel);
+            EmprestimoDataHolder emprestimo = new EmprestimoDataHolder();
+            emprestimo.setUsuario(usuarioSel);
+            root.setUserData(emprestimo);
             new MudarCena("./telas/TelaEmprestimo2.fxml", root);
         }
     }
