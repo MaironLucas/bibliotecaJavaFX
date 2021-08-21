@@ -201,4 +201,28 @@ public class LivroJpaController implements Serializable {
         }
     }
     
+    public List<Livro> findByTitulo(String titulo){
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Query q = em.createNamedQuery("Livro.findByTitulo", Livro.class);//em.createQuery(cq);
+            q.setParameter("titulo", "%" + titulo + "%");
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Livro> findByIsbn(String isbn){
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Query q = em.createNamedQuery("Livro.findByIsbn", Livro.class);//em.createQuery(cq);
+            q.setParameter("isbn", isbn);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
 }
