@@ -29,4 +29,13 @@ public enum DocumentoType {
     public Integer getIndex(){
         return index;
     }
+    
+    public static String getDescriptionByIndex(int index){
+        for (DocumentoType d : DocumentoType.values()){
+            if(d.index == index){
+                return d.description;
+            }       
+        }
+        return null;
+    }
 }

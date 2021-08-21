@@ -15,3 +15,11 @@
     -fx-pref-height: 40;
     -fx-alignment: center;
 }
+
+.painelUsuario{
+    -fx-padding: 0 100 0 100;
+}
+
+.espacador{
+    -fx-spacing:10;
+}
