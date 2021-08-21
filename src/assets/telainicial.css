@@ -16,12 +16,14 @@
 
 .button-inicial{
     -fx-font-weight: bold;
+    -fx-font-size: 20;
     -fx-pref-height: 100px;
-    -fx-pref-width: 145px;
-    -fx-border-radius: 0;
+    -fx-pref-width: 150px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-background-color: #dcdae1;
     -fx-border-color: #000000;
-    -fx-border-width: 3px;
+    -fx-border-width: 5px;
 }
 
 .painelBotoesSuperior{
