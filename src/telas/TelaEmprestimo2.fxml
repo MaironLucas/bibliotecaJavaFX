@@ -39,7 +39,7 @@
                               </HBox>
                               <HBox prefHeight="85.0" prefWidth="470.0" styleClass="painelBusca">
                                  <children>
-                                    <TextField prefHeight="25.0" prefWidth="373.0" promptText="Titulo ou código ISBN" />
+                                    <TextField fx:id="inputBusca" prefHeight="25.0" prefWidth="373.0" promptText="Titulo ou código ISBN" />
                                     <Button fx:id="btBuscar" mnemonicParsing="false" onAction="#buscarLivro" text="Buscar" />
                                  </children>
                               </HBox>
@@ -54,7 +54,7 @@
                   </HBox>
                   <HBox prefHeight="247.0" prefWidth="763.0" styleClass="painelView">
                      <children>
-                        <TableView fx:id="tabelaLivros" prefHeight="227.0" prefWidth="730.0">
+                        <TableView fx:id="tabelaLivros" onMouseClicked="#alteraCapa" prefHeight="227.0" prefWidth="730.0">
                           <columns>
                             <TableColumn fx:id="isbnCol" prefWidth="75.0" text="ISBN" />
                             <TableColumn fx:id="tituloCol" prefWidth="267.0" text="Titulo" />
@@ -73,9 +73,9 @@
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelBotoes" stylesheets="@../assets/barraDeBotoes.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btVoltar" mnemonicParsing="false" styleClass="voltar" text="Voltar" />
-            <Button fx:id="btEditar" mnemonicParsing="false" styleClass="limpar" text="Editar" />
-            <Button fx:id="btAvancar" mnemonicParsing="false" styleClass="salvar" text="Avancar" />
+            <Button fx:id="btVoltar" mnemonicParsing="false" onAction="#voltar" styleClass="voltar" text="Voltar" />
+            <Button fx:id="btEditar" mnemonicParsing="false" onAction="#editarLivro" styleClass="limpar" text="Editar" />
+            <Button fx:id="btAvancar" mnemonicParsing="false" onAction="#avancarParaEmprestimo" styleClass="salvar" text="Avancar" />
          </children>
       </HBox>
    </bottom>

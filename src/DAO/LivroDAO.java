@@ -43,6 +43,14 @@ public class LivroDAO {
         return objetoJPA.findLivroEntities();
     }
     
+    public List<Livro> getbyTitulo(String titulo){
+        return objetoJPA.findByTitulo(titulo);
+    }
+    
+    public List<Livro> getByIsbn(String isbn){
+        return objetoJPA.findByIsbn(isbn);
+    }
+    
     public void persist(Livro objeto){
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

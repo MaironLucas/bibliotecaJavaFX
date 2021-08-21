@@ -29,7 +29,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Livro.findAll", query = "SELECT l FROM Livro l"),
     @NamedQuery(name = "Livro.findByIDLivro", query = "SELECT l FROM Livro l WHERE l.iDLivro = :iDLivro"),
-    @NamedQuery(name = "Livro.findByTitulo", query = "SELECT l FROM Livro l WHERE l.titulo = :titulo"),
+    @NamedQuery(name = "Livro.findByTitulo", query = "SELECT l FROM Livro l WHERE l.titulo LIKE :titulo"),
     @NamedQuery(name = "Livro.findByCapa", query = "SELECT l FROM Livro l WHERE l.capa = :capa"),
     @NamedQuery(name = "Livro.findByIsbn", query = "SELECT l FROM Livro l WHERE l.isbn = :isbn"),
     @NamedQuery(name = "Livro.findByAutores", query = "SELECT l FROM Livro l WHERE l.autores = :autores"),
