@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -28,38 +25,4 @@
          </children>
       </VBox>
    </center>
-   <top>
-      <MenuBar prefHeight="23.0" prefWidth="626.0" stylesheets="@../assets/menu.css" BorderPane.alignment="CENTER">
-        <menus>
-            <Menu fx:id="menuInicio" mnemonicParsing="false" text="Início" />
-          <Menu mnemonicParsing="false" text="Cadastrar">
-            <items>
-              <MenuItem fx:id="menuCadastrarLivro" mnemonicParsing="false" onAction="#chamarCadastroLivro" text="Livro" />
-                  <MenuItem mnemonicParsing="false" onAction="#chamarCadastrarUsuario" text="Usuário" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Editar">
-              <items>
-                <MenuItem fx:id="menuEditarLivro" mnemonicParsing="false" onAction="#chamaEditarLivro" text="Livro" />
-                  <MenuItem fx:id="menuEditarUsuario" mnemonicParsing="false" onAction="#chamarEditarUsuario" text="Usuário" />
-              </items>
-            </Menu>
-          <Menu mnemonicParsing="false" text="Empréstimo">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#chamarEmprestarLivro" text="Novo" />
-                  <MenuItem mnemonicParsing="false" text="Renovar" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Devolução">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Realizar devolução" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Relatório">
-               <items>
-                  <MenuItem fx:id="menuRelatorio" mnemonicParsing="false" onAction="#chamarTelaRelatorio" text="Ver Relatório" />
-               </items></Menu>
-        </menus>
-      </MenuBar>
-   </top>
 </BorderPane>

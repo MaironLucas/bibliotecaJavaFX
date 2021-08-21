@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telaControles.MenuController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Início">
+            <items>
+              <MenuItem fx:id="menuInicio" mnemonicParsing="false" onAction="#chamaTelaInicial" text="Ir para tela inicial" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Cadastrar">
+            <items>
+              <MenuItem fx:id="menuLivro" mnemonicParsing="false" onAction="#chamarCadastroLivro" text="Livro" />
+                  <MenuItem fx:id="menuCadastrarUsuario" mnemonicParsing="false" onAction="#chamaCadastrarUsuario" text="Usuário" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Editar">
+            <items>
+              <MenuItem fx:id="menuEditarLivro" mnemonicParsing="false" onAction="#chamaEditarLivro" text="Livro" />
+                  <MenuItem fx:id="chamaEditarLivro" mnemonicParsing="false" onAction="#chamarEditarUsuario" text="Usuário" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Empréstimo">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#chamarEmprestarLivro" text="Novo" />
+                  <MenuItem mnemonicParsing="false" text="Renovar" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Devolução">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Realizar Devolução" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Relatório">
+              <items>
+                <MenuItem fx:id="menuRelatorio" mnemonicParsing="false" onAction="#chamarTelaRelatorio" text="Ver Relatório" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>

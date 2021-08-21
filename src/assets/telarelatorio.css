@@ -4,8 +4,10 @@
 
 .mainFxmlClass {
     -fx-background-color: #cccccc;
+    
     -fx-pref-width: 763;
     -fx-pref-height: 452;
+    
 }
 
 .painelTitulo{

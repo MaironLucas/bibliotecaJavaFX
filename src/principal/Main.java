@@ -22,13 +22,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         // Create the FXMLLoader
         try{
-            Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("./telas/TelaInicial.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("./telas/Menu.fxml"));
             Scene scene = new Scene(parent);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Gerenciador de Biblioteca");
             primaryStage.show(); 
         } catch (IOException e){
-            System.out.println("Carregou tortao");
+            System.out.println(e.getMessage());
         }
     }
 

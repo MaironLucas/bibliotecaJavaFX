@@ -7,13 +7,13 @@ package telaControles;
 
 import CodigosGerais.MudarCena;
 import CodigosGerais.Navegar;
+import dataController.EmprestimoDataHolder;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -21,22 +21,24 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author mairo
+ * @author galva
  */
-public class TelaInicialController implements Initializable {
+public class MenuController implements Initializable {
 
     @FXML
-    private Button btCadastrarLivro;
-    @FXML
-    private Button btCadastrarUsuario;
-    @FXML
-    private Button btEmprestar;
-    @FXML
-    private Button btRenovar;
-    @FXML
-    private Button btDevolver;
+    private MenuItem menuInicio;
     @FXML
     private BorderPane root;
+    @FXML
+    private MenuItem menuLivro;
+    @FXML
+    private MenuItem menuCadastrarUsuario;
+    @FXML
+    private MenuItem menuEditarLivro;
+    @FXML
+    private MenuItem chamaEditarLivro;
+    @FXML
+    private MenuItem menuRelatorio;
 
     /**
      * Initializes the controller class.
@@ -44,14 +46,16 @@ public class TelaInicialController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+        Platform.runLater(() -> {
+            new MudarCena("./telas/TelaInicial.fxml", root);
+        });
+    }
 
     @FXML
     private void chamarCadastroLivro(ActionEvent event) {
         Navegar temp = new Navegar("./telas/TelaCadastroLivro.fxml", (Stage) root.getScene().getWindow());
     }
 
-    @FXML
     private void chamarCadastrarUsuario(ActionEvent event) {
         Navegar temp = new Navegar("./telas/TelaCadastroUsuario.fxml", (Stage) root.getScene().getWindow());
     }
@@ -60,20 +64,29 @@ public class TelaInicialController implements Initializable {
     private void chamarEmprestarLivro(ActionEvent event) {
         new MudarCena("./telas/TelaEmprestimo.fxml", root);
     }
-    
+
+    @FXML
     private void chamaEditarLivro(ActionEvent event) {
         new MudarCena("./telas/TelaEditarLivro.fxml", root);
     }
 
+    @FXML
     private void chamarEditarUsuario(ActionEvent event) {
         new MudarCena("./telas/TelaEditarUsuario.fxml", root);
     }
 
+    @FXML
     private void chamarTelaRelatorio(ActionEvent event) {
         new MudarCena("./telas/TelaRelatorio.fxml", root);
     }
 
+    @FXML
     private void chamaTelaInicial(ActionEvent event) {
         new MudarCena("./telas/TelaInicial.fxml", root);
     }
+
+    @FXML
+    private void chamaCadastrarUsuario(ActionEvent event) {
+    }
+
 }
