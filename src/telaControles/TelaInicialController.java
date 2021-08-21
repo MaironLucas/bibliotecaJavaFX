@@ -46,7 +46,7 @@ public class TelaInicialController implements Initializable {
     @FXML
     private Menu menuInicio;
     @FXML
-    private Menu menuRelatorio;
+    private MenuItem menuRelatorio;
 
     /**
      * Initializes the controller class.

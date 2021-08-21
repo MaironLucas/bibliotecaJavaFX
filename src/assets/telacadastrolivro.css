@@ -6,6 +6,8 @@
     -fx-background-color: #cccccc;
     -fx-border-color: #000000;
     -fx-border-width: 2;
+    -fx-pref-width: 763;
+    -fx-pref-height: 452;
 }
 
 .painelTitulo{

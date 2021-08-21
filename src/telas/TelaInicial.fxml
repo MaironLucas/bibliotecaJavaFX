@@ -55,7 +55,10 @@
                 <MenuItem mnemonicParsing="false" text="Realizar devolução" />
               </items>
             </Menu>
-            <Menu fx:id="menuRelatorio" mnemonicParsing="false" onAction="#chamarTelaRelatorio" text="Relatório" />
+            <Menu mnemonicParsing="false" text="Relatório">
+               <items>
+                  <MenuItem fx:id="menuRelatorio" mnemonicParsing="false" onAction="#chamarTelaRelatorio" text="Ver Relatório" />
+               </items></Menu>
         </menus>
       </MenuBar>
    </top>
