@@ -10,7 +10,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../assets/telaticket.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telaControles.TelaTicketController">
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="caixaCentral" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="53.0" prefWidth="763.0">
                <children>
@@ -37,12 +37,12 @@
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="txtNome" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children></HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="txtTipoDoc" strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="txtNumDoc" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children></HBox>
                      </children>
                   </VBox>
@@ -51,13 +51,13 @@
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="txtTelefone" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="email:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="txtEmail" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </HBox>
                      </children></VBox>
@@ -79,13 +79,13 @@
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Titulo" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="txtTitulo" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="txtIsbn" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </HBox>
                      </children>
@@ -95,7 +95,7 @@
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autores:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="txtAutores" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </HBox>
                      </children>
@@ -117,13 +117,13 @@
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data do empréstimo:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="txtDataEmprestimo" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data de Devolucão:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="txtDataDevolucao" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </HBox>
                      </children>
@@ -133,7 +133,7 @@
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tempo de empréstimo:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="txtTempo" strokeType="OUTSIDE" strokeWidth="0.0" />
                            </children>
                         </HBox>
                      </children>
@@ -145,8 +145,8 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="52.0" prefWidth="683.0" style="-fx-spacing: 10;" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" styleClass="button-imprimir" text="Imprimir" />
-            <Button mnemonicParsing="false" styleClass="button-finalizar" text="Finalizar" />
+            <Button fx:id="btImprimir" mnemonicParsing="false" onAction="#solicitarImpressao" styleClass="button-imprimir" text="Imprimir" />
+            <Button mnemonicParsing="false" onAction="#finalizarEmprestimo" styleClass="button-finalizar" text="Finalizar" />
          </children>
       </HBox>
    </bottom>

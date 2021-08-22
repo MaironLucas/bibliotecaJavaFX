@@ -5,13 +5,15 @@
  */
 package telaControles;
 
+import CodigosGerais.CaixaDeAlerta;
 import CodigosGerais.DocumentoType;
+import CodigosGerais.MudarCena;
+import DAO.EmprestimoDAO;
 import dataController.EmprestimoDataHolder;
 import entidades.Emprestimo;
 import entidades.Livro;
 import entidades.Usuario;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -60,7 +63,7 @@ public class TelaEmprestimo3Controller implements Initializable {
     private ChoiceBox<String> btTempo;
     
     private BorderPane root;
-    private EmprestimoDataHolder emprestimo;
+    private EmprestimoDataHolder emprestimoData;
     private Usuario usuarioSel;
     private Livro livroSel;
 
@@ -79,9 +82,9 @@ public class TelaEmprestimo3Controller implements Initializable {
         
         Platform.runLater(() -> {
             root = (BorderPane) btTempo.getScene().getRoot();
-            emprestimo = (EmprestimoDataHolder) root.getUserData();
-            usuarioSel = emprestimo.getUsuario();
-            livroSel = emprestimo.getLivro();
+            emprestimoData = (EmprestimoDataHolder) root.getUserData();
+            usuarioSel = emprestimoData.getUsuario();
+            livroSel = emprestimoData.getLivro();
             povoarUsuario();
             povoarLivro();
         });
@@ -132,6 +135,14 @@ public class TelaEmprestimo3Controller implements Initializable {
         emprestimo.setDataDevolucao(date1);
         System.out.println(date1);
         
-        
+        try{
+            EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+            emprestimoDAO.add(emprestimo);
+            emprestimoData.setEmprestimo(emprestimo);
+            root.setUserData(emprestimoData);
+            new MudarCena("./telas/TelaTicket.fxml", root);
+        } catch(Exception e){
+            new CaixaDeAlerta(Alert.AlertType.ERROR, "Falha no banco", e.getMessage());
+        }
     }
 }
