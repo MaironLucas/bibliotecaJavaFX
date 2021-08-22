@@ -61,7 +61,7 @@ public class TelaCadastroLivroController implements Initializable {
 
     @FXML
     private void chamarTelaInicial(ActionEvent event) {
-        Navegar temp = new Navegar("./telas/TelaInicial.fxml", (Stage) btVoltar.getScene().getWindow());
+        Navegar temp = new Navegar("./telas/Menu.fxml", (Stage) btVoltar.getScene().getWindow());
     }
 
     @FXML
