@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -7,23 +8,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../assets/telaticket.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telaControles.TelaTicketController">
-   <top>
-      <HBox alignment="CENTER" prefHeight="53.0" prefWidth="763.0" BorderPane.alignment="CENTER">
-         <children>
-            <Text fx:id="txtTitulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Comprovante de empréstimo">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Text>
-         </children>
-      </HBox>
-   </top>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="28.0" prefWidth="763.0">
+            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="763.0">
+               <children>
+                  <Text fx:id="txtTitulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Comprovante de empréstimo">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="763.0">
                <children>
                   <Label text="Dados do usuário">
                      <font>
@@ -32,18 +30,40 @@
                   </Label>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelDeDados" stylesheets="@../assets/telaticket.css">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="painelDeDados" stylesheets="@../assets/telaticket.css">
                <children>
                   <VBox prefHeight="100.0" prefWidth="350.0">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0" />
-                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </children></HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </children></HBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="100.0" prefWidth="353.0" />
+                  <VBox prefHeight="100.0" prefWidth="353.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone:" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="email:" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </children>
+                        </HBox>
+                     </children></VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="28.0" prefWidth="763.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="763.0">
                <children>
                   <Label text="Dados do livro">
                      <font>
@@ -52,8 +72,36 @@
                   </Label>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-            <HBox alignment="CENTER" prefHeight="28.0" prefWidth="763.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelDeDados">
+               <children>
+                  <VBox prefHeight="100.0" prefWidth="350.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Titulo" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN:" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="353.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autores:" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="763.0">
                <children>
                   <Label text="Dados do Empréstimo">
                      <font>
@@ -62,8 +110,44 @@
                   </Label>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelDeDados">
+               <children>
+                  <VBox prefHeight="100.0" prefWidth="350.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data do empréstimo:" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data de Devolucão:" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="100.0" prefWidth="353.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="linhasDeTexto">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tempo de empréstimo:" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></HBox>
          </children>
       </VBox>
    </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="52.0" prefWidth="683.0" style="-fx-spacing: 10;" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" styleClass="button-imprimir" text="Imprimir" />
+            <Button mnemonicParsing="false" styleClass="button-finalizar" text="Finalizar" />
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

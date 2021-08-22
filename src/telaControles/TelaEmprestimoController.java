@@ -12,6 +12,7 @@ import dataController.EmprestimoDataHolder;
 import entidades.Usuario;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,6 +54,10 @@ public class TelaEmprestimoController implements Initializable {
 
     private UsuarioDAO usuarioDao;
     
+    private BorderPane root;
+    
+    private boolean edicao;
+    
     /**
      * Initializes the controller class.
      */
@@ -63,6 +68,15 @@ public class TelaEmprestimoController implements Initializable {
         tipoDocCol.setCellValueFactory(new PropertyValueFactory<>("tipoDoc"));
         numeroDocCol.setCellValueFactory(new PropertyValueFactory<>("numDoc"));
         telefoneCol.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+        
+        Platform.runLater(() -> {
+            root = (BorderPane) btVoltar.getScene().getRoot();
+            if (root.getUserData() instanceof Usuario){
+                edicao = true;
+            } else{
+                edicao = false;
+            }
+        });
     }    
 
     @FXML
