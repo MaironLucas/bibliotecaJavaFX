@@ -5,9 +5,16 @@
  */
 package telaControles;
 
+import CodigosGerais.MudarCena;
+import dataController.EmprestimoDataHolder;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -16,6 +23,9 @@ import javafx.fxml.Initializable;
  */
 public class TelaEditarLivroController implements Initializable {
 
+    @FXML
+    private Button btVoltar;
+
     /**
      * Initializes the controller class.
      */
@@ -23,5 +33,11 @@ public class TelaEditarLivroController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void voltarInicial(ActionEvent event) {
+           BorderPane root = (BorderPane) btVoltar.getScene().getRoot();
+            new MudarCena("./telas/TelaInicial.fxml", root);
+    }
     
 }

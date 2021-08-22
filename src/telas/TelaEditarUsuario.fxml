@@ -26,7 +26,7 @@
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelBotoes" stylesheets="@../assets/barraDeBotoes.css" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" styleClass="voltar" text="Voltar" />
+            <Button fx:id="btVoltar" mnemonicParsing="false" onAction="#chamaVoltarInicial" styleClass="voltar" text="Voltar" />
             <Button mnemonicParsing="false" styleClass="limpar" text="Limpar" />
             <Button mnemonicParsing="false" styleClass="salvar" text="Salvar" />
          </children>
