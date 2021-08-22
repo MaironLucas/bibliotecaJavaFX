@@ -7,6 +7,7 @@ package telaControles;
 
 import CodigosGerais.CaixaDeAlerta;
 import CodigosGerais.MudarCena;
+import CodigosGerais.Navegar;
 import DAO.UsuarioDAO;
 import dataController.EmprestimoDataHolder;
 import entidades.Usuario;
@@ -25,6 +26,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -53,11 +55,11 @@ public class TelaEmprestimoController implements Initializable {
     private TableColumn<Usuario, String> telefoneCol;
 
     private UsuarioDAO usuarioDao;
-    
+
     private BorderPane root;
-    
+
     private boolean edicao;
-    
+
     /**
      * Initializes the controller class.
      */
@@ -68,16 +70,16 @@ public class TelaEmprestimoController implements Initializable {
         tipoDocCol.setCellValueFactory(new PropertyValueFactory<>("tipoDoc"));
         numeroDocCol.setCellValueFactory(new PropertyValueFactory<>("numDoc"));
         telefoneCol.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-        
+
         Platform.runLater(() -> {
             root = (BorderPane) btVoltar.getScene().getRoot();
-            if (root.getUserData() instanceof Usuario){
+            if (root.getUserData() instanceof Usuario) {
                 edicao = true;
-            } else{
+            } else {
                 edicao = false;
             }
         });
-    }    
+    }
 
     @FXML
     private void chamarTelaInicial(ActionEvent event) {
@@ -87,7 +89,6 @@ public class TelaEmprestimoController implements Initializable {
     @FXML
     private void limparCampos(ActionEvent event) {
     }
-
 
     @FXML
     private void buscarUsuarios(ActionEvent event) {
@@ -101,15 +102,20 @@ public class TelaEmprestimoController implements Initializable {
     @FXML
     private void avancarParaLivro(ActionEvent event) {
         Usuario usuarioSel = tabelaDeUsuarios.getSelectionModel().getSelectedItem();
-        if (usuarioSel == null){
+        if (usuarioSel == null) {
             new CaixaDeAlerta(Alert.AlertType.ERROR, "Falha de inserção", "Um usuário deve ser selecionado!");
-        } else{
+        } else {
             BorderPane root = (BorderPane) btVoltar.getScene().getRoot();
-            EmprestimoDataHolder emprestimo = new EmprestimoDataHolder();
-            emprestimo.setUsuario(usuarioSel);
-            root.setUserData(emprestimo);
-            new MudarCena("./telas/TelaEmprestimo2.fxml", root);
+            if (edicao) {
+                Navegar temp = new Navegar("./telas/TelaCadastroUsuario.fxml", (Stage) root.getScene().getWindow());
+            } else {
+                EmprestimoDataHolder emprestimo = new EmprestimoDataHolder();
+                emprestimo.setUsuario(usuarioSel);
+                root.setUserData(emprestimo);
+                new MudarCena("./telas/TelaEmprestimo2.fxml", root);
+            }
+
         }
     }
-   
+
 }
