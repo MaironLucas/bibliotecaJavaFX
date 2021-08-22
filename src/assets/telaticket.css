@@ -6,6 +6,7 @@
     -fx-pref-width: 763;
     -fx-pref-height: 452;
     -fx-background-color: #ffffff;
+    -fx-padding:0 40 0 40;
 }
 
 .painelDeDados{
@@ -15,4 +16,22 @@
 
 .linhasDeTexto{
     -fx-spacing:10;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.button{
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-border-radius: 0;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+    -fx-text-fill:#ffffff;
+}
+
+.button-finalizar{
+    -fx-background-color:#00cc00;
+}
+
+.button-imprimir{
+    -fx-background-color: #009999;
 }

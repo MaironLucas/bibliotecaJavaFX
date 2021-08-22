@@ -7,6 +7,8 @@ package telaControles;
 
 import CodigosGerais.MudarCena;
 import CodigosGerais.Navegar;
+import dataController.EmprestimoDataHolder;
+import entidades.Usuario;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -58,6 +60,7 @@ public class TelaInicialController implements Initializable {
 
     @FXML
     private void chamarEmprestarLivro(ActionEvent event) {
+        root.setUserData(new EmprestimoDataHolder());
         new MudarCena("./telas/TelaEmprestimo.fxml", root);
     }
     
@@ -66,6 +69,7 @@ public class TelaInicialController implements Initializable {
     }
 
     private void chamarEditarUsuario(ActionEvent event) {
+        
         new MudarCena("./telas/TelaEditarUsuario.fxml", root);
     }
 
