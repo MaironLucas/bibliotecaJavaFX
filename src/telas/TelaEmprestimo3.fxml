@@ -139,7 +139,7 @@
       <HBox prefHeight="50.0" prefWidth="763.0" styleClass="painelBotoes" stylesheets="@../assets/barraDeBotoes.css" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" styleClass="voltar" text="Voltar" />
-            <Button mnemonicParsing="false" styleClass="salvar" text="Avancar" />
+            <Button mnemonicParsing="false" onAction="#avancarParaTicket" styleClass="salvar" text="Avancar" />
          </children>
       </HBox>
    </bottom>

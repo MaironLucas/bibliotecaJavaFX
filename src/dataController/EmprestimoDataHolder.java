@@ -5,6 +5,7 @@
  */
 package dataController;
 
+import entidades.Emprestimo;
 import entidades.Livro;
 import entidades.Usuario;
 
@@ -15,10 +16,12 @@ import entidades.Usuario;
 public class EmprestimoDataHolder {
     private Usuario usuario;
     private Livro livro;
+    private Emprestimo emprestimo;
     
     public EmprestimoDataHolder(){
         usuario = null;
-        usuario = null;
+        livro = null;
+        emprestimo = null;
     }
     
     public void setUsuario(Usuario usuario){
@@ -35,5 +38,13 @@ public class EmprestimoDataHolder {
     
     public Livro getLivro(){
         return this.livro;
+    }
+    
+    public void setEmprestimo(Emprestimo emprestimo){
+        this.emprestimo = emprestimo;
+    }
+    
+    public Emprestimo getEmprestimo(){
+        return this.emprestimo;
     }
 }

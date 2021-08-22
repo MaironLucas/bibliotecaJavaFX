@@ -67,7 +67,7 @@ public class TelaEmprestimoController implements Initializable {
 
     @FXML
     private void chamarTelaInicial(ActionEvent event) {
-        
+        new MudarCena("./telas/TelaInicial.fxml", (BorderPane) btVoltar.getScene().getRoot());
     }
 
     @FXML
