@@ -12,6 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -23,6 +26,20 @@ public class TelaEditarUsuarioController implements Initializable {
 
     @FXML
     private Button btVoltar;
+    @FXML
+    private TextField inputBusca;
+    @FXML
+    private TableView<?> tabelaDeUsuarios;
+    @FXML
+    private TableColumn<?, ?> fotoCol;
+    @FXML
+    private TableColumn<?, ?> nomeCol;
+    @FXML
+    private TableColumn<?, ?> tipoDocCol;
+    @FXML
+    private TableColumn<?, ?> numeroDocCol;
+    @FXML
+    private TableColumn<?, ?> telefoneCol;
 
     /**
      * Initializes the controller class.
@@ -36,6 +53,10 @@ public class TelaEditarUsuarioController implements Initializable {
     private void chamaVoltarInicial(ActionEvent event) {
         BorderPane root = (BorderPane) btVoltar.getScene().getRoot();
         new MudarCena("./telas/TelaInicial.fxml", root);
+    }
+
+    @FXML
+    private void buscarUsuarios(ActionEvent event) {
     }
 }
 

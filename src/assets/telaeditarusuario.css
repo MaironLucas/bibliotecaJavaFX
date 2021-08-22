@@ -8,6 +8,12 @@
     -fx-pref-height: 452;
 }
 
+.painelBusca {
+    -fx-alignment: center_left;
+    -fx-padding: 30;
+    -fx-spacing: 10;
+}
+
 .painelTitulo{
     -fx-background-color: #ffffff;
     -fx-border-color: #000000;

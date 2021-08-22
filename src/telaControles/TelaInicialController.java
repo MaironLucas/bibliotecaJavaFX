@@ -37,6 +37,8 @@ public class TelaInicialController implements Initializable {
     private Button btDevolver;
     @FXML
     private BorderPane root;
+    @FXML
+    private Button btRelatorio;
 
     /**
      * Initializes the controller class.
@@ -69,15 +71,12 @@ public class TelaInicialController implements Initializable {
         new MudarCena("./telas/TelaEditarUsuario.fxml", root);
     }
 
-    private void chamarTelaRelatorio(ActionEvent event) {
-        new MudarCena("./telas/TelaRelatorio.fxml", root);
-    }
-
     private void chamaTelaInicial(ActionEvent event) {
         new MudarCena("./telas/TelaInicial.fxml", root);
     }
 
     @FXML
     private void chamaTelaRelatorio(ActionEvent event) {
+        new MudarCena("./telas/TelaRelatorio.fxml", root);
     }
 }
