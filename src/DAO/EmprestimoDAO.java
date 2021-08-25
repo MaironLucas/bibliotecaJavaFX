@@ -57,7 +57,7 @@ public class EmprestimoDAO {
         }
     }
     
-    public List<Emprestimo> getEmprestadosNome(String nome){
-        return objetoJPA.findEmprestadosNome(nome);
+    public List<Emprestimo> getEmprestados(String busca){
+        return objetoJPA.findEmprestados(busca, busca, busca, busca);
     }
 }

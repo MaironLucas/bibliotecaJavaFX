@@ -72,7 +72,7 @@ public class TelaDevolucaoController implements Initializable {
     private void buscarEmprestimos(ActionEvent event) {
         EmprestimoDAO emprestimoDao = new EmprestimoDAO();
         ObservableList<Emprestimo> listaDeEmprestimos = FXCollections.observableArrayList();
-        listaDeEmprestimos.addAll(emprestimoDao.getEmprestadosNome(inputBusca.getText()));
+        listaDeEmprestimos.addAll(emprestimoDao.getEmprestados(inputBusca.getText()));
         tabelaDeEmprestimos.setItems(listaDeEmprestimos);
     }
     

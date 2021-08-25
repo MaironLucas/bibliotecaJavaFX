@@ -194,16 +194,18 @@ public class EmprestimoJpaController implements Serializable {
         }
     }
     
-    public List<Emprestimo> findEmprestadosNome(String nome) {
+    public List<Emprestimo> findEmprestados(String nome, String documento, String isbn, String titulo) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Query q = em.createNamedQuery("Emprestimo.findEmprestadosNome", Emprestimo.class);//em.createQuery(cq);
+            Query q = em.createNamedQuery("Emprestimo.findEmprestados", Emprestimo.class);//em.createQuery(cq);
             q.setParameter("nome", "%" + nome + "%");
+            q.setParameter("isbn", isbn);
+            q.setParameter("titulo", "%" + titulo + "%");
+            q.setParameter("numDoc", documento);
             return q.getResultList();
         } finally {
             em.close();
         }
     }
-    
 }
