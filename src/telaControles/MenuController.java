@@ -42,6 +42,7 @@ public class MenuController implements Initializable {
     @FXML
     private MenuItem menuRelatorio;
 
+    private Stage stage;
     /**
      * Initializes the controller class.
      */
@@ -49,19 +50,20 @@ public class MenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         Platform.runLater(() -> {
+            stage = (Stage) root.getScene().getWindow();
             new MudarCena("./telas/TelaInicial.fxml", root);
         });
     }
 
     @FXML
     private void chamarCadastroLivro(ActionEvent event) {
-        root.setUserData(null);
-        Navegar temp = new Navegar("./telas/TelaCadastroLivro.fxml", (Stage) root.getScene().getWindow());
+        stage.setUserData(null);
+        new Navegar("./telas/TelaCadastroLivro.fxml", (Stage) root.getScene().getWindow());
     }
 
     @FXML
     private void chamaCadastrarUsuario(ActionEvent event) {
-        root.setUserData(null);
+        stage.setUserData(null);
         Navegar temp = new Navegar("./telas/TelaCadastroUsuario.fxml", (Stage) root.getScene().getWindow());
     }
 

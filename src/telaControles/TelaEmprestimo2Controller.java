@@ -139,19 +139,18 @@ public class TelaEmprestimo2Controller implements Initializable {
         if (livroSel == null) {
             new CaixaDeAlerta(Alert.AlertType.WARNING, "Falha de Seleção", "Um livro deve ser selecionado!");
         } else {
-            if (livroSel.getQtdexemplares() == livroSel.getQtdemprestados()) {
-                new CaixaDeAlerta(Alert.AlertType.WARNING, "Falha na seleção", "O livro selecionado não possui estoque");
-            } else {
-                if (!edicao) {
+            if (!edicao){
+                if (livroSel.getQtdexemplares() == livroSel.getQtdemprestados()){
+                    new CaixaDeAlerta(Alert.AlertType.WARNING, "Falha na seleção", "O livro selecionado não possui estoque");
+                } else{
                     emprestimo.setLivro(livroSel);
                     root.setUserData(emprestimo);
                     new MudarCena("./telas/TelaEmprestimo3.fxml", root);
-                } else {
-                    Stage stagetemp = (Stage) btVoltar.getScene().getWindow();
-                    stagetemp.setUserData(livroSel);
-                    new Navegar("./telas/TelaCadastroLivro.fxml", (Stage) root.getScene().getWindow());
-                }
-
+                }      
+            } else{
+                Stage stagetemp = (Stage) btVoltar.getScene().getWindow();
+                stagetemp.setUserData(livroSel);
+                new Navegar("./telas/TelaCadastroLivro.fxml", (Stage) root.getScene().getWindow());
             }
 
         }

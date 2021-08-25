@@ -36,29 +36,11 @@ public class LivroJpaController implements Serializable {
     }
 
     public void create(Livro livro) {
-        if (livro.getEmprestimoCollection() == null) {
-            livro.setEmprestimoCollection(new ArrayList<Emprestimo>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Emprestimo> attachedEmprestimoCollection = new ArrayList<Emprestimo>();
-            for (Emprestimo emprestimoCollectionEmprestimoToAttach : livro.getEmprestimoCollection()) {
-                emprestimoCollectionEmprestimoToAttach = em.getReference(emprestimoCollectionEmprestimoToAttach.getClass(), emprestimoCollectionEmprestimoToAttach.getIDEmprestimo());
-                attachedEmprestimoCollection.add(emprestimoCollectionEmprestimoToAttach);
-            }
-            livro.setEmprestimoCollection(attachedEmprestimoCollection);
             em.persist(livro);
-            for (Emprestimo emprestimoCollectionEmprestimo : livro.getEmprestimoCollection()) {
-                Livro oldIDLivroOfEmprestimoCollectionEmprestimo = emprestimoCollectionEmprestimo.getIDLivro();
-                emprestimoCollectionEmprestimo.setIDLivro(livro);
-                emprestimoCollectionEmprestimo = em.merge(emprestimoCollectionEmprestimo);
-                if (oldIDLivroOfEmprestimoCollectionEmprestimo != null) {
-                    oldIDLivroOfEmprestimoCollectionEmprestimo.getEmprestimoCollection().remove(emprestimoCollectionEmprestimo);
-                    oldIDLivroOfEmprestimoCollectionEmprestimo = em.merge(oldIDLivroOfEmprestimoCollectionEmprestimo);
-                }
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -72,47 +54,14 @@ public class LivroJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Livro persistentLivro = em.find(Livro.class, livro.getIDLivro());
-            Collection<Emprestimo> emprestimoCollectionOld = persistentLivro.getEmprestimoCollection();
-            Collection<Emprestimo> emprestimoCollectionNew = livro.getEmprestimoCollection();
-            List<String> illegalOrphanMessages = null;
-            for (Emprestimo emprestimoCollectionOldEmprestimo : emprestimoCollectionOld) {
-                if (!emprestimoCollectionNew.contains(emprestimoCollectionOldEmprestimo)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Emprestimo " + emprestimoCollectionOldEmprestimo + " since its IDLivro field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            Collection<Emprestimo> attachedEmprestimoCollectionNew = new ArrayList<Emprestimo>();
-            for (Emprestimo emprestimoCollectionNewEmprestimoToAttach : emprestimoCollectionNew) {
-                emprestimoCollectionNewEmprestimoToAttach = em.getReference(emprestimoCollectionNewEmprestimoToAttach.getClass(), emprestimoCollectionNewEmprestimoToAttach.getIDEmprestimo());
-                attachedEmprestimoCollectionNew.add(emprestimoCollectionNewEmprestimoToAttach);
-            }
-            emprestimoCollectionNew = attachedEmprestimoCollectionNew;
-            livro.setEmprestimoCollection(emprestimoCollectionNew);
             livro = em.merge(livro);
-            for (Emprestimo emprestimoCollectionNewEmprestimo : emprestimoCollectionNew) {
-                if (!emprestimoCollectionOld.contains(emprestimoCollectionNewEmprestimo)) {
-                    Livro oldIDLivroOfEmprestimoCollectionNewEmprestimo = emprestimoCollectionNewEmprestimo.getIDLivro();
-                    emprestimoCollectionNewEmprestimo.setIDLivro(livro);
-                    emprestimoCollectionNewEmprestimo = em.merge(emprestimoCollectionNewEmprestimo);
-                    if (oldIDLivroOfEmprestimoCollectionNewEmprestimo != null && !oldIDLivroOfEmprestimoCollectionNewEmprestimo.equals(livro)) {
-                        oldIDLivroOfEmprestimoCollectionNewEmprestimo.getEmprestimoCollection().remove(emprestimoCollectionNewEmprestimo);
-                        oldIDLivroOfEmprestimoCollectionNewEmprestimo = em.merge(oldIDLivroOfEmprestimoCollectionNewEmprestimo);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = livro.getIDLivro();
                 if (findLivro(id) == null) {
-                    throw new NonexistentEntityException("The livro with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.");
                 }
             }
             throw ex;

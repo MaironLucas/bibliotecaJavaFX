@@ -32,9 +32,11 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Emprestimo.findByIDEmprestimo", query = "SELECT e FROM Emprestimo e WHERE e.iDEmprestimo = :iDEmprestimo"),
     @NamedQuery(name = "Emprestimo.findByDataEmprestimo", query = "SELECT e FROM Emprestimo e WHERE e.dataEmprestimo = :dataEmprestimo"),
     @NamedQuery(name = "Emprestimo.findByDataDevolucao", query = "SELECT e FROM Emprestimo e WHERE e.dataDevolucao = :dataDevolucao"),
-    @NamedQuery(name = "Emprestimo.findByPrazo", query = "SELECT e FROM Emprestimo e WHERE e.prazo = :prazo"),
-    @NamedQuery(name = "Emprestimo.findByTempoDeEmprestimo", query = "SELECT e FROM Emprestimo e WHERE e.tempoDeEmprestimo = :tempoDeEmprestimo"),
-    @NamedQuery(name = "Emprestimo.findByObservacoes", query = "SELECT e FROM Emprestimo e WHERE e.observacoes = :observacoes")})
+    @NamedQuery(name = "Emprestimo.findEmprestadosNome", query = "SELECT e FROM Emprestimo e WHERE e.iDUsuario.nome = :nome AND e.dataDevolucao IS NULL"),
+    @NamedQuery(name = "Emprestimo.findEmprestadosDocumento", query = "SELECT e FROM Emprestimo e WHERE e.iDUsuario.numDoc = :numDoc AND e.dataDevolucao IS NULL"),
+    @NamedQuery(name = "Emprestimo.findEmprestadosTitulo", query = "SELECT e FROM Emprestimo e WHERE e.iDLivro.titulo = :titulo AND e.dataDevolucao IS NULL"),
+    @NamedQuery(name = "Emprestimo.findEmprestadosISBN", query = "SELECT e FROM Emprestimo e WHERE e.iDLivro.isbn = :isbn AND e.dataDevolucao IS NULL"),
+})
 public class Emprestimo implements Serializable {
 
     private static final long serialVersionUID = 1L;
