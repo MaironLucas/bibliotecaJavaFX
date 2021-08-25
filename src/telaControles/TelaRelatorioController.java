@@ -11,7 +11,10 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -23,6 +26,14 @@ public class TelaRelatorioController implements Initializable {
 
     @FXML
     private Button btVoltar;
+    @FXML
+    private BarChart<?, ?> grafico;
+    @FXML
+    private TableView<?> tabela;
+    @FXML
+    private TableColumn<?, ?> colLivro;
+    @FXML
+    private TableColumn<?, ?> colTempo;
 
     /**
      * Initializes the controller class.
