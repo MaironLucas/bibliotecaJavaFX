@@ -85,12 +85,14 @@ public class TelaEmprestimo2Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //Definicao das colunas
         isbnCol.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         tituloCol.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         autoresCol.setCellValueFactory(new PropertyValueFactory<>("autores"));
         exemplaresCol.setCellValueFactory(new PropertyValueFactory<>("qtdexemplares"));
         emprestadosCol.setCellValueFactory(new PropertyValueFactory<>("qtdemprestados"));
-
+        
+        //Difinindo qual tela chamou (edicao de livro ou emprestimo)
         Platform.runLater(() -> {
             root = (BorderPane) btBuscar.getScene().getRoot();
             if (root.getUserData() instanceof Livro) {
@@ -107,6 +109,7 @@ public class TelaEmprestimo2Controller implements Initializable {
 
     @FXML
     private void buscarLivro(ActionEvent event) {
+        //Busca no banco pelas informaçoes passadas
         LivroDAO livroDao = new LivroDAO();
         ObservableList<Livro> listaDeLivros = FXCollections.observableArrayList();
         listaDeLivros.addAll(livroDao.getbyTitulo(inputBusca.getText()));
@@ -116,6 +119,7 @@ public class TelaEmprestimo2Controller implements Initializable {
 
     @FXML
     private void alteraCapa(MouseEvent event) {
+        //Altera a capa de acordo com o emprestimo selecionado
         Livro temp = (Livro) tabelaLivros.getSelectionModel().getSelectedItem();
         if (temp != null) {
             Image tempImage = new Image(temp.getCapa());
@@ -135,6 +139,7 @@ public class TelaEmprestimo2Controller implements Initializable {
 
     @FXML
     private void avancarParaEmprestimo(ActionEvent event) {
+        //Faz as verificacoes (se foi selecionado, se é edicao de livro)
         Livro livroSel = tabelaLivros.getSelectionModel().getSelectedItem();
         if (livroSel == null) {
             new CaixaDeAlerta(Alert.AlertType.WARNING, "Falha de Seleção", "Um livro deve ser selecionado!");

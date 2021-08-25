@@ -56,4 +56,8 @@ public class EmprestimoDAO {
             em.close();
         }
     }
+    
+    public List<Emprestimo> getEmprestadosNome(String nome){
+        return objetoJPA.findEmprestadosNome(nome);
+    }
 }

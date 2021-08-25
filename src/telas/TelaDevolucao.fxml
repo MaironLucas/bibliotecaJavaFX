@@ -10,12 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="452.0" prefWidth="763.0" styleClass="mainFxmlClass" stylesheets="@../assets/teladevolucao.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="telaControles.TelaDevolucaoController">
+<BorderPane prefHeight="452.0" prefWidth="763.0" styleClass="mainFxmlClass" stylesheets="@../assets/teladevolucao.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="telaControles.TelaDevolucaoController">
     <bottom>
       <HBox alignment="CENTER" prefHeight="58.0" prefWidth="763.0" styleClass="painelBotoes" stylesheets="@../assets/barraDeBotoes.css" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btVoltar" mnemonicParsing="false" onAction="#chamarTelaInicial" styleClass="voltar" text="Voltar" />
-            <Button mnemonicParsing="false" onAction="#limparCampos" styleClass="limpar" text="Limpar" />
             <Button fx:id="btnAvancar" mnemonicParsing="false" onAction="#avancarParaDevolucao" styleClass="salvar" text="Avancar" />
          </children>
       </HBox>
@@ -42,11 +41,11 @@
                <children>
                   <TableView fx:id="tabelaDeEmprestimos" prefHeight="258.0" prefWidth="892.0">
                      <columns>
-                        <TableColumn prefWidth="173.0" text="Titulo" />
-                        <TableColumn prefWidth="66.0" text="ISBN" />
-                        <TableColumn prefWidth="204.0" text="Nome usuário" />
-                        <TableColumn prefWidth="108.0" text="Tipo Documento" />
-                        <TableColumn prefWidth="151.0" text=" Número Documento" />
+                        <TableColumn fx:id="tituloCol" prefWidth="173.0" text="Titulo" />
+                        <TableColumn fx:id="isbnCol" prefWidth="66.0" text="ISBN" />
+                        <TableColumn fx:id="nomeCol" prefWidth="204.0" text="Nome usuário" />
+                        <TableColumn fx:id="tipoDocCol" prefWidth="108.0" text="Tipo Documento" />
+                        <TableColumn fx:id="numeroDocCol" prefWidth="151.0" text=" Número Documento" />
                      </columns>
                   </TableView>
                </children></HBox>

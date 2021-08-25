@@ -34,7 +34,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Devolução">
               <items>
-                <MenuItem mnemonicParsing="false" text="Realizar Devolução" />
+                <MenuItem mnemonicParsing="false" onAction="#chamarDevolver" text="Realizar Devolução" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Relatório">

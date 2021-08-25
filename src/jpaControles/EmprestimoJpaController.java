@@ -194,4 +194,16 @@ public class EmprestimoJpaController implements Serializable {
         }
     }
     
+    public List<Emprestimo> findEmprestadosNome(String nome) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Query q = em.createNamedQuery("Emprestimo.findEmprestadosNome", Emprestimo.class);//em.createQuery(cq);
+            q.setParameter("nome", "%" + nome + "%");
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
 }

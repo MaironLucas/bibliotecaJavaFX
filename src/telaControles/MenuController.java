@@ -94,4 +94,9 @@ public class MenuController implements Initializable {
         new MudarCena("./telas/TelaInicial.fxml", root);
     }
 
+    @FXML
+    private void chamarDevolver(ActionEvent event) {
+        new MudarCena("./telas/TelaDevolucao.fxml", root);
+    }
+
 }

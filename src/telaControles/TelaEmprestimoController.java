@@ -6,6 +6,7 @@
 package telaControles;
 
 import CodigosGerais.CaixaDeAlerta;
+import CodigosGerais.DocumentoType;
 import CodigosGerais.MudarCena;
 import CodigosGerais.Navegar;
 import DAO.UsuarioDAO;
@@ -14,6 +15,8 @@ import entidades.Usuario;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,8 +28,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -44,7 +49,7 @@ public class TelaEmprestimoController implements Initializable {
     @FXML
     private TableView<Usuario> tabelaDeUsuarios;
     @FXML
-    private TableColumn<Usuario, String> fotoCol;
+    private TableColumn<Usuario, ImageView> fotoCol;
     @FXML
     private TableColumn<Usuario, String> nomeCol;
     @FXML
@@ -67,7 +72,7 @@ public class TelaEmprestimoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         fotoCol.setCellValueFactory(new PropertyValueFactory<>("foto"));
         nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        tipoDocCol.setCellValueFactory(new PropertyValueFactory<>("tipoDoc"));
+        tipoDocCol.setCellValueFactory((param) -> new SimpleStringProperty(DocumentoType.getDescriptionByIndex(param.getValue().getTipoDoc())));
         numeroDocCol.setCellValueFactory(new PropertyValueFactory<>("numDoc"));
         telefoneCol.setCellValueFactory(new PropertyValueFactory<>("telefone"));
 
