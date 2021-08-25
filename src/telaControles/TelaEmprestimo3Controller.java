@@ -9,6 +9,7 @@ import CodigosGerais.CaixaDeAlerta;
 import CodigosGerais.DocumentoType;
 import CodigosGerais.MudarCena;
 import DAO.EmprestimoDAO;
+import DAO.LivroDAO;
 import dataController.EmprestimoDataHolder;
 import entidades.Emprestimo;
 import entidades.Livro;
@@ -132,11 +133,18 @@ public class TelaEmprestimo3Controller implements Initializable {
         //Calculando data de devolucao
         date = date.plusDays(diasDeEmprestimo);
         date1 = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        emprestimo.setDataDevolucao(date1);
+        emprestimo.setPrazo(date1);
         System.out.println(date1);
         
+        
         try{
+            LivroDAO livroDao = new LivroDAO();
             EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+            //Atualiza quantidade de emprestados
+            livroSel.setQtdemprestados(livroSel.getQtdemprestados() + 1);
+            livroDao.edit(livroSel);
+            
+            //Realiza emprestimo
             emprestimoDAO.add(emprestimo);
             emprestimoData.setEmprestimo(emprestimo);
             root.setUserData(emprestimoData);

@@ -121,11 +121,16 @@ public class TelaEmprestimo2Controller implements Initializable {
     private void avancarParaEmprestimo(ActionEvent event) {
         Livro livroSel = tabelaLivros.getSelectionModel().getSelectedItem();
         if (livroSel == null){
-            new CaixaDeAlerta(Alert.AlertType.WARNING, "Falha de inserção", "Um livro deve ser selecionado!");
+            new CaixaDeAlerta(Alert.AlertType.WARNING, "Falha de Seleção", "Um livro deve ser selecionado!");
         } else{
-            emprestimo.setLivro(livroSel);
-            root.setUserData(emprestimo);
-            new MudarCena("./telas/TelaEmprestimo3.fxml", root);
+            if (livroSel.getQtdexemplares() == livroSel.getQtdemprestados()){
+                new CaixaDeAlerta(Alert.AlertType.WARNING, "Falha na seleção", "O livro selecionado não possui estoque");
+            } else{
+                emprestimo.setLivro(livroSel);
+                root.setUserData(emprestimo);
+                new MudarCena("./telas/TelaEmprestimo3.fxml", root);
+            }
+            
         }
     }
 }

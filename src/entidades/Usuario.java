@@ -7,7 +7,9 @@ package entidades;
 
 import exceptions.ExceptionGenerica;
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -41,6 +44,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "Usuario.findByBairro", query = "SELECT u FROM Usuario u WHERE u.bairro = :bairro"),
     @NamedQuery(name = "Usuario.findByNumero", query = "SELECT u FROM Usuario u WHERE u.numero = :numero")})
 public class Usuario implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iDUsuario")
+    private Collection<Emprestimo> emprestimoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -281,6 +287,14 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "entidades.Usuario[ iDUsuario=" + iDUsuario + " ]";
+    }
+
+    public Collection<Emprestimo> getEmprestimoCollection() {
+        return emprestimoCollection;
+    }
+
+    public void setEmprestimoCollection(Collection<Emprestimo> emprestimoCollection) {
+        this.emprestimoCollection = emprestimoCollection;
     }
     
 }

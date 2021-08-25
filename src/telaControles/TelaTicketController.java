@@ -13,7 +13,6 @@ import entidades.Emprestimo;
 import entidades.Livro;
 import entidades.Usuario;
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -100,7 +99,7 @@ public class TelaTicketController implements Initializable {
 
     private void povoarEmprestimo(){
         txtDataEmprestimo.setText(emprestimo.getDataEmprestimo().toString());
-        txtDataDevolucao.setText(emprestimo.getDataDevolucao().toString());
+        txtDataDevolucao.setText(emprestimo.getPrazo().toString());
         txtTempo.setText(Integer.toString(emprestimo.getTempoDeEmprestimo()));
     }
     

@@ -32,6 +32,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Emprestimo.findByIDEmprestimo", query = "SELECT e FROM Emprestimo e WHERE e.iDEmprestimo = :iDEmprestimo"),
     @NamedQuery(name = "Emprestimo.findByDataEmprestimo", query = "SELECT e FROM Emprestimo e WHERE e.dataEmprestimo = :dataEmprestimo"),
     @NamedQuery(name = "Emprestimo.findByDataDevolucao", query = "SELECT e FROM Emprestimo e WHERE e.dataDevolucao = :dataDevolucao"),
+    @NamedQuery(name = "Emprestimo.findByPrazo", query = "SELECT e FROM Emprestimo e WHERE e.prazo = :prazo"),
     @NamedQuery(name = "Emprestimo.findByTempoDeEmprestimo", query = "SELECT e FROM Emprestimo e WHERE e.tempoDeEmprestimo = :tempoDeEmprestimo"),
     @NamedQuery(name = "Emprestimo.findByObservacoes", query = "SELECT e FROM Emprestimo e WHERE e.observacoes = :observacoes")})
 public class Emprestimo implements Serializable {
@@ -49,6 +50,10 @@ public class Emprestimo implements Serializable {
     @Column(name = "DataDevolucao")
     @Temporal(TemporalType.DATE)
     private Date dataDevolucao;
+    @Basic(optional = false)
+    @Column(name = "Prazo")
+    @Temporal(TemporalType.DATE)
+    private Date prazo;
     @Basic(optional = false)
     @Column(name = "TempoDeEmprestimo")
     private int tempoDeEmprestimo;
@@ -68,9 +73,10 @@ public class Emprestimo implements Serializable {
         this.iDEmprestimo = iDEmprestimo;
     }
 
-    public Emprestimo(Integer iDEmprestimo, Date dataEmprestimo, int tempoDeEmprestimo) {
+    public Emprestimo(Integer iDEmprestimo, Date dataEmprestimo, Date prazo, int tempoDeEmprestimo) {
         this.iDEmprestimo = iDEmprestimo;
         this.dataEmprestimo = dataEmprestimo;
+        this.prazo = prazo;
         this.tempoDeEmprestimo = tempoDeEmprestimo;
     }
 
@@ -96,6 +102,14 @@ public class Emprestimo implements Serializable {
 
     public void setDataDevolucao(Date dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
+    }
+
+    public Date getPrazo() {
+        return prazo;
+    }
+
+    public void setPrazo(Date prazo) {
+        this.prazo = prazo;
     }
 
     public int getTempoDeEmprestimo() {
