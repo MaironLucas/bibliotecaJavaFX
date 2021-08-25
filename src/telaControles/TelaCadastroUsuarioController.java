@@ -10,11 +10,14 @@ import CodigosGerais.DocumentoType;
 import CodigosGerais.MotivoType;
 import CodigosGerais.Navegar;
 import CodigosGerais.StatusType;
+import CodigosGerais.SucessoAlert;
 import DAO.UsuarioDAO;
+import dataController.EmprestimoDataHolder;
 import entidades.Usuario;
 import exceptions.ExceptionGenerica;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +28,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -75,62 +79,65 @@ public class TelaCadastroUsuarioController implements Initializable {
     private Text textMotivo;
     @FXML
     private ChoiceBox<String> btUF;
-    
+
     private ToggleGroup group1;
     private ToggleGroup group;
     @FXML
     private TextField inputNumero;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
         //Populando a Choice Box de motivos
         btMotivo.getItems().addAll(FXCollections.observableArrayList(MotivoType.FALTA.getDescription(),
-            MotivoType.LIVRO_DEFEITO.getDescription(), MotivoType.PROBLEMAS.getDescription()));
-        
+                MotivoType.LIVRO_DEFEITO.getDescription(), MotivoType.PROBLEMAS.getDescription()));
+
         //Populando choice box de UF
         btUF.getItems().addAll(FXCollections.observableArrayList("RS", "SC", "PR", "SP",
-            "RJ", "ES", "BA", "MS", "MT", "GO", "TO", "AM", "AC", "AP", "AL", "CE",
-            "MA", "MG", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "DF"));
-        
+                "RJ", "ES", "BA", "MS", "MT", "GO", "TO", "AM", "AC", "AP", "AL", "CE",
+                "MA", "MG", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "DF"));
+
         //Criando o grupo de radio para documentos
         group = new ToggleGroup();
-        
+
         rCPF.setText(DocumentoType.CPF.getDescription());
         rCPF.setUserData(DocumentoType.CPF);
         rCPF.setToggleGroup(group);
-        
+
         rRG.setText(DocumentoType.RG.getDescription());
         rRG.setUserData(DocumentoType.RG);
         rRG.setToggleGroup(group);
-        
+
         rEstudante.setText(DocumentoType.CEST.getDescription());
         rEstudante.setUserData(DocumentoType.CEST);
         rEstudante.setToggleGroup(group);
-        
+
         rCPF.setSelected(true);
-        
+
         //Criando o grupo de radio para causa de bloqueio
         group1 = new ToggleGroup();
         rAtivo.setText(StatusType.ATIVO.getDescription());
         rAtivo.setUserData(StatusType.ATIVO);
         rAtivo.setToggleGroup(group1);
-        
+
         rInativo.setText(StatusType.INATIVO.getDescription());
         rInativo.setUserData(StatusType.INATIVO);
         rInativo.setToggleGroup(group1);
-        
+
         rBloqueado.setText(StatusType.BLOQUEADO.getDescription());
         rBloqueado.setUserData(StatusType.BLOQUEADO);
         rBloqueado.setToggleGroup(group1);
         rAtivo.setSelected(true);
-        
+
         //Deixando seleção de motivo invisivel
         textMotivo.setVisible(false);
         btMotivo.setVisible(false);
         
-    }    
+    }
 
     @FXML
     private void chamarTelaInicial(ActionEvent event) {
@@ -159,15 +166,21 @@ public class TelaCadastroUsuarioController implements Initializable {
     private void salvarInformacoes(ActionEvent event) {
         Usuario usuario = new Usuario();
         boolean controle = false;
-        try{
+        try {
             usuario.setNome(inputNome.getText());
             usuario.setEmail(inputEmail.getText());
-            if (rBloqueado.isSelected()){
+            if (rBloqueado.isSelected()) {
                 String descricaoBotao = btMotivo.getSelectionModel().getSelectedItem();
-                switch (descricaoBotao){
-                    case "Falta na entrega":usuario.setMotivo(1);break;
-                    case "Livro devolvido com defeito":usuario.setMotivo(2);break;
-                    case "Problemas cadastrais":usuario.setMotivo(3);break;
+                switch (descricaoBotao) {
+                    case "Falta na entrega":
+                        usuario.setMotivo(1);
+                        break;
+                    case "Livro devolvido com defeito":
+                        usuario.setMotivo(2);
+                        break;
+                    case "Problemas cadastrais":
+                        usuario.setMotivo(3);
+                        break;
                 }
             } else {
                 usuario.setMotivo(null);
@@ -185,16 +198,17 @@ public class TelaCadastroUsuarioController implements Initializable {
             usuario.setNumero(inputNumero.getText());
             usuario.setUf(btUF.getSelectionModel().getSelectedItem());
             System.out.println(usuario);
-            controle = true;  
-        } catch(ExceptionGenerica e){
+            controle = true;
+        } catch (ExceptionGenerica e) {
             new CaixaDeAlerta(Alert.AlertType.ERROR, "Falha no input", e.getMessage());
         }
-        
-        if (controle){
-            try{
+
+        if (controle) {
+            try {
                 UsuarioDAO usuarioPersist = new UsuarioDAO();
                 usuarioPersist.add(usuario);
-            } catch (Exception e){
+                new SucessoAlert("Livro cadastrado com sucesso");
+            } catch (Exception e) {
                 new CaixaDeAlerta(Alert.AlertType.ERROR, "Erro", e.getMessage());
             }
         }
@@ -217,5 +231,5 @@ public class TelaCadastroUsuarioController implements Initializable {
         btMotivo.setVisible(true);
         textMotivo.setVisible(true);
     }
-    
+
 }

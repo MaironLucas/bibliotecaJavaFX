@@ -6,7 +6,9 @@
 package telaControles;
 
 import CodigosGerais.CaixaDeAlerta;
+import CodigosGerais.MudarCena;
 import CodigosGerais.Navegar;
+import CodigosGerais.SucessoAlert;
 import DAO.LivroDAO;
 import entidades.Livro;
 import exceptions.ExceptionGenerica;
@@ -110,6 +112,7 @@ public class TelaCadastroLivroController implements Initializable {
             try{
                 LivroDAO livroDao = new LivroDAO();
                 livroDao.add(livro);
+                new SucessoAlert("Livro cadastrado com sucesso");
             } catch(Exception e){
                 new CaixaDeAlerta(Alert.AlertType.ERROR, "Falha no banco", e.getMessage());
             }
