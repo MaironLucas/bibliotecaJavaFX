@@ -25,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -85,13 +86,29 @@ public class TelaCadastroUsuarioController implements Initializable {
     @FXML
     private TextField inputNumero;
 
+    private Usuario usuarioSel;
+    private boolean edicao;
+    @FXML
+    private Label textTitulo;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
+
+        Platform.runLater(() -> {
+            Stage stagetemp = (Stage) btVoltar.getScene().getWindow();
+            usuarioSel = (Usuario) stagetemp.getUserData();
+            if (usuarioSel != null) {
+                edicao = true;
+                textTitulo.setText("Edição de Usuário");
+                povoarCampos();
+            } else {
+                edicao = false;
+            }
+        });
+
         //Populando a Choice Box de motivos
         btMotivo.getItems().addAll(FXCollections.observableArrayList(MotivoType.FALTA.getDescription(),
                 MotivoType.LIVRO_DEFEITO.getDescription(), MotivoType.PROBLEMAS.getDescription()));
@@ -136,7 +153,7 @@ public class TelaCadastroUsuarioController implements Initializable {
         //Deixando seleção de motivo invisivel
         textMotivo.setVisible(false);
         btMotivo.setVisible(false);
-        
+
     }
 
     @FXML
@@ -206,8 +223,15 @@ public class TelaCadastroUsuarioController implements Initializable {
         if (controle) {
             try {
                 UsuarioDAO usuarioPersist = new UsuarioDAO();
-                usuarioPersist.add(usuario);
-                new SucessoAlert("Livro cadastrado com sucesso");
+                if (!edicao) {
+                    usuarioPersist.add(usuario);
+                    new SucessoAlert("Usuário cadastrado com sucesso");
+                } else {
+                    usuario.setIDUsuario(usuarioSel.getIDUsuario());
+                    usuarioPersist.edit(usuario);
+                    new SucessoAlert("Usuário editado com sucesso");
+                }
+                new Navegar("./telas/Menu.fxml", (Stage) btVoltar.getScene().getWindow());
             } catch (Exception e) {
                 new CaixaDeAlerta(Alert.AlertType.ERROR, "Erro", e.getMessage());
             }
@@ -230,6 +254,59 @@ public class TelaCadastroUsuarioController implements Initializable {
     private void bloqueadoSelecionado(ActionEvent event) {
         btMotivo.setVisible(true);
         textMotivo.setVisible(true);
+    }
+
+    private void povoarCampos() {
+        inputNome.setText(usuarioSel.getNome());
+        inputBairro.setText(usuarioSel.getBairro());
+        inputCEP.setText(usuarioSel.getCep());
+        inputCidade.setText(usuarioSel.getCidade());
+        inputRua.setText(usuarioSel.getRua());
+        inputTelefone.setText(usuarioSel.getTelefone());
+        inputDocumento.setText(usuarioSel.getNumDoc());
+        inputNumero.setText(usuarioSel.getNumero());
+        // EMAIL
+        if (usuarioSel.getEmail() != null) {
+            inputEmail.setText(usuarioSel.getEmail());
+        } else {
+            inputEmail.clear();
+        }
+        // STATUS/MOTIVO
+        if (usuarioSel.getMotivo() != null) {
+            textMotivo.setVisible(true);
+            btMotivo.setVisible(true);
+            rBloqueado.setSelected(true);
+            switch (usuarioSel.getMotivo()) {
+                case 1:
+                    btMotivo.setValue(MotivoType.FALTA.getDescription());
+                    break;
+                case 2:
+                    btMotivo.setValue(MotivoType.LIVRO_DEFEITO.getDescription());
+                    break;
+                case 3:
+                    btMotivo.setValue(MotivoType.PROBLEMAS.getDescription());
+                    break;
+            }
+        } else {
+            textMotivo.setVisible(false);
+            btMotivo.setVisible(false);
+            if (usuarioSel.getStatus() == 1) {
+                rAtivo.setSelected(true);
+            } else {
+                rInativo.setSelected(true);
+            }
+
+        }
+        // TIPO DOC
+        if (usuarioSel.getTipoDoc() == 1) {
+            rCPF.setSelected(true);
+        } else if (usuarioSel.getTipoDoc() == 2) {
+            rRG.setSelected(true);
+        } else {
+            rEstudante.setSelected(true);
+        }
+        // UF
+        btUF.setValue(usuarioSel.getUf());
     }
 
 }

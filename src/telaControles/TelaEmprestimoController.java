@@ -107,6 +107,8 @@ public class TelaEmprestimoController implements Initializable {
         } else {
             BorderPane root = (BorderPane) btVoltar.getScene().getRoot();
             if (edicao) {
+                Stage stagetemp = (Stage) btVoltar.getScene().getWindow();
+                stagetemp.setUserData(usuarioSel);
                 Navegar temp = new Navegar("./telas/TelaCadastroUsuario.fxml", (Stage) root.getScene().getWindow());
             } else {
                 EmprestimoDataHolder emprestimo = new EmprestimoDataHolder();

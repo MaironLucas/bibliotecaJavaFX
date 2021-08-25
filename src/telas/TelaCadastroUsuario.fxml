@@ -15,7 +15,7 @@
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelTitulo" BorderPane.alignment="CENTER">
          <children>
-            <Label styleClass="titulo" text="Cadastro de usuário" />
+            <Label fx:id="textTitulo" styleClass="titulo" text="Cadastro de usuário" />
          </children>
       </HBox>
    </top>
