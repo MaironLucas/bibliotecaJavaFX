@@ -67,7 +67,7 @@ public class TelaInicialController implements Initializable {
     }
     
     private void chamaEditarLivro(ActionEvent event) {
-        new MudarCena("./telas/TelaEditarLivro.fxml", root);
+        new MudarCena("./telas/TelaEmprestimo2.fxml", root);
     }
 
     private void chamarEditarUsuario(ActionEvent event) {

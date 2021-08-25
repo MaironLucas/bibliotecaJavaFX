@@ -23,9 +23,9 @@
                      <children>
                         <VBox prefHeight="140.0" prefWidth="469.0">
                            <children>
-                              <HBox prefHeight="21.0" prefWidth="497.0" styleClass="painelUsuario">
+                              <HBox fx:id="userBox" prefHeight="21.0" prefWidth="497.0" styleClass="painelUsuario">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuário: ">
+                                    <Text fx:id="textUser" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuário: ">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

@@ -8,6 +8,7 @@ package telaControles;
 import CodigosGerais.MudarCena;
 import CodigosGerais.Navegar;
 import dataController.EmprestimoDataHolder;
+import entidades.Livro;
 import entidades.Usuario;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -69,7 +70,8 @@ public class MenuController implements Initializable {
 
     @FXML
     private void chamaEditarLivro(ActionEvent event) {
-        new MudarCena("./telas/TelaEditarLivro.fxml", root);
+        root.setUserData(new Livro());
+        new MudarCena("./telas/TelaEmprestimo2.fxml", root);
     }
 
     @FXML

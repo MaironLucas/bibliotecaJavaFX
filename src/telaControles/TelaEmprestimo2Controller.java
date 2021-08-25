@@ -31,6 +31,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -63,12 +65,18 @@ public class TelaEmprestimo2Controller implements Initializable {
     private TableColumn<Livro, Integer> exemplaresCol;
     @FXML
     private TableColumn<Livro, Integer> emprestadosCol;
-    
+
     private EmprestimoDataHolder emprestimo;
     private Usuario usuarioSel;
     @FXML
     private TextField inputBusca;
     private BorderPane root;
+    @FXML
+    private HBox userBox;
+
+    private boolean edicao;
+    @FXML
+    private Text textUser;
 
     /**
      * Initializes the controller class.
@@ -80,14 +88,20 @@ public class TelaEmprestimo2Controller implements Initializable {
         autoresCol.setCellValueFactory(new PropertyValueFactory<>("autores"));
         exemplaresCol.setCellValueFactory(new PropertyValueFactory<>("qtdexemplares"));
         emprestadosCol.setCellValueFactory(new PropertyValueFactory<>("qtdemprestados"));
-        
+
         Platform.runLater(() -> {
             root = (BorderPane) btBuscar.getScene().getRoot();
-            emprestimo = (EmprestimoDataHolder) root.getUserData();
-            usuarioSel = emprestimo.getUsuario();
-            labelUsuario.setText(usuarioSel.getNome());
+            if (root.getUserData() instanceof Livro) {
+                edicao = true;
+                userBox.setVisible(false);
+            } else {
+                edicao = false;
+                emprestimo = (EmprestimoDataHolder) root.getUserData();
+                usuarioSel = emprestimo.getUsuario();
+                labelUsuario.setText(usuarioSel.getNome());
+            }
         });
-    }    
+    }
 
     @FXML
     private void buscarLivro(ActionEvent event) {
@@ -101,7 +115,7 @@ public class TelaEmprestimo2Controller implements Initializable {
     @FXML
     private void alteraCapa(MouseEvent event) {
         Livro temp = (Livro) tabelaLivros.getSelectionModel().getSelectedItem();
-        if (temp != null){
+        if (temp != null) {
             Image tempImage = new Image(temp.getCapa());
             capaView.setImage(tempImage);
         }
@@ -120,17 +134,17 @@ public class TelaEmprestimo2Controller implements Initializable {
     @FXML
     private void avancarParaEmprestimo(ActionEvent event) {
         Livro livroSel = tabelaLivros.getSelectionModel().getSelectedItem();
-        if (livroSel == null){
+        if (livroSel == null) {
             new CaixaDeAlerta(Alert.AlertType.WARNING, "Falha de Seleção", "Um livro deve ser selecionado!");
-        } else{
-            if (livroSel.getQtdexemplares() == livroSel.getQtdemprestados()){
+        } else {
+            if (livroSel.getQtdexemplares() == livroSel.getQtdemprestados()) {
                 new CaixaDeAlerta(Alert.AlertType.WARNING, "Falha na seleção", "O livro selecionado não possui estoque");
-            } else{
+            } else {
                 emprestimo.setLivro(livroSel);
                 root.setUserData(emprestimo);
                 new MudarCena("./telas/TelaEmprestimo3.fxml", root);
             }
-            
+
         }
     }
 }
