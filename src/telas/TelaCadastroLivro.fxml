@@ -80,7 +80,7 @@
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="painelTitulo" BorderPane.alignment="CENTER">
          <children>
-            <Label styleClass="titulo" text="Cadastro de Livro" />
+            <Label fx:id="textTitle" styleClass="titulo" text="Cadastro de Livro" />
          </children>
       </HBox>
    </top>

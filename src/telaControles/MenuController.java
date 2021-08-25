@@ -55,11 +55,13 @@ public class MenuController implements Initializable {
 
     @FXML
     private void chamarCadastroLivro(ActionEvent event) {
+        root.setUserData(null);
         Navegar temp = new Navegar("./telas/TelaCadastroLivro.fxml", (Stage) root.getScene().getWindow());
     }
 
     @FXML
     private void chamaCadastrarUsuario(ActionEvent event) {
+        root.setUserData(null);
         Navegar temp = new Navegar("./telas/TelaCadastroUsuario.fxml", (Stage) root.getScene().getWindow());
     }
 

@@ -7,6 +7,7 @@ package telaControles;
 
 import CodigosGerais.CaixaDeAlerta;
 import CodigosGerais.MudarCena;
+import CodigosGerais.Navegar;
 import DAO.LivroDAO;
 import dataController.EmprestimoDataHolder;
 import entidades.Livro;
@@ -33,6 +34,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -140,9 +142,16 @@ public class TelaEmprestimo2Controller implements Initializable {
             if (livroSel.getQtdexemplares() == livroSel.getQtdemprestados()) {
                 new CaixaDeAlerta(Alert.AlertType.WARNING, "Falha na seleção", "O livro selecionado não possui estoque");
             } else {
-                emprestimo.setLivro(livroSel);
-                root.setUserData(emprestimo);
-                new MudarCena("./telas/TelaEmprestimo3.fxml", root);
+                if (!edicao) {
+                    emprestimo.setLivro(livroSel);
+                    root.setUserData(emprestimo);
+                    new MudarCena("./telas/TelaEmprestimo3.fxml", root);
+                } else {
+                    Stage stagetemp = (Stage) btVoltar.getScene().getWindow();
+                    stagetemp.setUserData(livroSel);
+                    new Navegar("./telas/TelaCadastroLivro.fxml", (Stage) root.getScene().getWindow());
+                }
+
             }
 
         }

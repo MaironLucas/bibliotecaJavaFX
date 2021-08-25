@@ -15,11 +15,13 @@ import exceptions.ExceptionGenerica;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -50,16 +52,35 @@ public class TelaCadastroLivroController implements Initializable {
     private TextField inputEndCapa;
     @FXML
     private ImageView imageView;
-    
+
     private String caminho;
+
+    private Livro livroSel;
+    private boolean edicao;
+    @FXML
+    private Label textTitle;
+    @FXML
+    private Button btnSalvar;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        Platform.runLater(() -> {
+            Stage stagetemp = (Stage) btVoltar.getScene().getWindow();
+            livroSel = (Livro) stagetemp.getUserData();
+            if (livroSel != null) {
+                System.out.println("tela de edicao");
+                edicao = true;
+                textTitle.setText("Edição de Livro");
+                povoarCampos();
+            } else {
+                System.out.println("tela de cadastro");
+                edicao = false;
+            }
+        });
+    }
 
     @FXML
     private void chamarTelaInicial(ActionEvent event) {
@@ -68,7 +89,7 @@ public class TelaCadastroLivroController implements Initializable {
 
     @FXML
     private void buscarImagem(ActionEvent event) {
-        try{
+        try {
             FileChooser arquivo = new FileChooser();
             arquivo.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg"));
             File temp = arquivo.showOpenDialog((Stage) btnBuscar.getScene().getWindow());
@@ -77,7 +98,7 @@ public class TelaCadastroLivroController implements Initializable {
             Image imagem = new Image(caminho);
             imageView.setImage(imagem);
             inputEndCapa.setText(caminho);
-        } catch(Exception e){
+        } catch (Exception e) {
             new CaixaDeAlerta(Alert.AlertType.ERROR, "Erro de carregamento", "Falha ao carregar a imagem!");
         }
     }
@@ -94,7 +115,7 @@ public class TelaCadastroLivroController implements Initializable {
     private void salvarLivro(ActionEvent event) {
         Livro livro = new Livro();
         boolean validador = false;
-        try{
+        try {
             livro.setTitulo(inputTitulo.getText());
             livro.setAutores(inputAutores.getText());
             livro.setIsbn(inputISBN.getText());
@@ -102,21 +123,38 @@ public class TelaCadastroLivroController implements Initializable {
             livro.setQtdemprestados(0);
             livro.setCapa(caminho);
             validador = true;
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             new CaixaDeAlerta(Alert.AlertType.ERROR, "Erro de tipo de dado", "Campo quantidade só aceita números!");
-        } catch (ExceptionGenerica e){
+        } catch (ExceptionGenerica e) {
             new CaixaDeAlerta(Alert.AlertType.ERROR, "Falha no input", e.getMessage());
         }
-        
-        if (validador){
-            try{
+
+        if (validador) {
+            try {
                 LivroDAO livroDao = new LivroDAO();
-                livroDao.add(livro);
-                new SucessoAlert("Livro cadastrado com sucesso");
-            } catch(Exception e){
+                if (!edicao) {
+                    livroDao.add(livro);
+                    new SucessoAlert("Livro cadastrado com sucesso");
+                } else {
+                    livro.setIDLivro(livroSel.getIDLivro());
+                    livroDao.edit(livro);
+                    new SucessoAlert("Livro editado com sucesso");
+                }
+                new Navegar("./telas/Menu.fxml", (Stage) btVoltar.getScene().getWindow());
+            } catch (Exception e) {
                 new CaixaDeAlerta(Alert.AlertType.ERROR, "Falha no banco", e.getMessage());
             }
         }
     }
-    
+
+    private void povoarCampos() {
+        inputTitulo.setText(livroSel.getTitulo());
+        inputAutores.setText(livroSel.getAutores());
+        inputISBN.setText(livroSel.getIsbn());
+        inputQtd.setText(Integer.toString(livroSel.getQtdexemplares()));
+        inputEndCapa.setText(livroSel.getCapa());
+        caminho = livroSel.getCapa();
+        imageView.setImage(new Image(livroSel.getCapa()));
+    }
+
 }
