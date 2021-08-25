@@ -19,45 +19,50 @@ import jpaControles.exceptions.NonexistentEntityException;
  * @author mairo
  */
 public class EmprestimoDAO {
+
     private final EmprestimoJpaController objetoJPA;
     private final EntityManagerFactory emf;
-    
-    public EmprestimoDAO(){
+
+    public EmprestimoDAO() {
         emf = Persistence.createEntityManagerFactory("ProjetoFinalPU");
         objetoJPA = new EmprestimoJpaController(emf);
     }
-    
-    public void add(Emprestimo objeto) throws Exception{
+
+    public void add(Emprestimo objeto) throws Exception {
         objetoJPA.create(objeto);
     }
-    
-    public void edit(Emprestimo objeto) throws Exception{
+
+    public void edit(Emprestimo objeto) throws Exception {
         objetoJPA.edit(objeto);
     }
-    
-    public void remove(Integer id) throws NonexistentEntityException, IllegalOrphanException{
+
+    public void remove(Integer id) throws NonexistentEntityException, IllegalOrphanException {
         objetoJPA.destroy(id);
     }
-    
-    public List<Emprestimo> getAllUsuarios(){
+
+    public List<Emprestimo> getAllUsuarios() {
         return objetoJPA.findEmprestimoEntities();
     }
-    
-    public void persist(Emprestimo objeto){
+
+    public void persist(Emprestimo objeto) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        try{
+        try {
             em.persist(objeto);
             em.getTransaction().commit();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             em.getTransaction().rollback();
-        } finally{
+        } finally {
             em.close();
         }
     }
-    
-    public List<Emprestimo> getEmprestados(String busca){
+
+    public List<Emprestimo> getEmprestados(String busca) {
         return objetoJPA.findEmprestados(busca, busca, busca, busca);
+    }
+
+    public List<Emprestimo> getAllEmprestados() {
+        return objetoJPA.findAllEmprestados();
     }
 }

@@ -33,6 +33,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Emprestimo.findByDataEmprestimo", query = "SELECT e FROM Emprestimo e WHERE e.dataEmprestimo = :dataEmprestimo"),
     @NamedQuery(name = "Emprestimo.findByDataDevolucao", query = "SELECT e FROM Emprestimo e WHERE e.dataDevolucao = :dataDevolucao"),
     @NamedQuery(name = "Emprestimo.findEmprestados", query = "SELECT e FROM Emprestimo e WHERE (e.iDUsuario.nome LIKE :nome OR e.iDUsuario.numDoc = :numDoc OR e.iDLivro.titulo LIKE :titulo OR e.iDLivro.isbn = :isbn) AND e.dataDevolucao IS NULL"),
+    @NamedQuery(name = "Emprestimo.findAllEmprestados", query = "SELECT e FROM Emprestimo e WHERE e.dataDevolucao IS NULL"),
 })
 public class Emprestimo implements Serializable {
 

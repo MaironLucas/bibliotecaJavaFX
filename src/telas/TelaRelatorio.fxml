@@ -26,13 +26,23 @@
                   </Text>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="763.0" />
+            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="763.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tabela de Livros e Tempo emprestado">
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Text>
+               </children></HBox>
             <HBox alignment="CENTER" prefHeight="344.0" prefWidth="763.0">
                <children>
                   <TableView fx:id="tabela" prefHeight="325.0" prefWidth="322.0">
                     <columns>
-                      <TableColumn fx:id="colLivro" prefWidth="222.40003049373627" text="Livro" />
-                      <TableColumn fx:id="colTempo" prefWidth="104.79998779296875" text="Tempo" />
+                      <TableColumn fx:id="colLivro" prefWidth="203.19997560977936" text="Livro" />
+                      <TableColumn fx:id="colTempo" prefWidth="124.800048828125" text="Dias Emprestado" />
                     </columns>
                      <opaqueInsets>
                         <Insets />
