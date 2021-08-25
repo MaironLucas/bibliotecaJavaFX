@@ -114,9 +114,7 @@ public class TelaCadastroUsuarioController implements Initializable {
                 MotivoType.LIVRO_DEFEITO.getDescription(), MotivoType.PROBLEMAS.getDescription()));
 
         //Populando choice box de UF
-        btUF.getItems().addAll(FXCollections.observableArrayList("RS", "SC", "PR", "SP",
-                "RJ", "ES", "BA", "MS", "MT", "GO", "TO", "AM", "AC", "AP", "AL", "CE",
-                "MA", "MG", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "DF"));
+        btUF.getItems().addAll(FXCollections.observableArrayList("AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"));
 
         //Criando o grupo de radio para documentos
         group = new ToggleGroup();
