@@ -94,9 +94,12 @@ public class TelaEmprestimoController implements Initializable {
             root = (BorderPane) btVoltar.getScene().getRoot();
             if (root.getUserData() instanceof Usuario) {
                 edicao = true;
+                System.out.println("Edicao");
             } else {
                 edicao = false;
+                System.out.println("Emprestimo");
             }
+            root.setUserData(null);
         });
     }
 

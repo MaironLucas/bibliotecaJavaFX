@@ -10,6 +10,7 @@ import CodigosGerais.DocumentoType;
 import CodigosGerais.MotivoType;
 import CodigosGerais.MudarCena;
 import DAO.EmprestimoDAO;
+import DAO.LivroDAO;
 import DAO.UsuarioDAO;
 import dataController.EmprestimoDataHolder;
 import entidades.Emprestimo;
@@ -132,11 +133,17 @@ public class TelaDevolucao2Controller implements Initializable {
             emprestimo.setObservacoes("O livro " + livroSel.getTitulo() + " foi devolvido dentro do prazo por " + usuarioSel.getNome());
         }
         
+        //Decrementando quantidade de livros emprestados
+        emprestimo.getIDLivro().setQtdemprestados(emprestimo.getIDLivro().getQtdemprestados() - 1);
+        
+        //Lancando emprestimo, usuario e livro no banco
         try{
             UsuarioDAO usuarioDao = new UsuarioDAO();
             EmprestimoDAO emprestimoDao = new EmprestimoDAO();
+            LivroDAO livroDao = new LivroDAO();
             usuarioDao.edit(emprestimo.getIDUsuario());
             emprestimoDao.edit(emprestimo);
+            livroDao.edit(emprestimo.getIDLivro());
             root.setUserData(emprestimo);
             new MudarCena("./telas/TelaTicket.fxml", root);
         } catch (Exception e){

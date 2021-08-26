@@ -7,7 +7,7 @@ package telaControles;
 
 import CodigosGerais.MudarCena;
 import CodigosGerais.Navegar;
-import dataController.EmprestimoDataHolder;
+import dataController.RenovacaoDataHolder;
 import entidades.Livro;
 import entidades.Usuario;
 import java.net.URL;
@@ -96,6 +96,12 @@ public class MenuController implements Initializable {
 
     @FXML
     private void chamarDevolver(ActionEvent event) {
+        new MudarCena("./telas/TelaDevolucao.fxml", root);
+    }
+
+    @FXML
+    private void chamarRenovar(ActionEvent event) {
+        root.setUserData(new RenovacaoDataHolder());
         new MudarCena("./telas/TelaDevolucao.fxml", root);
     }
 

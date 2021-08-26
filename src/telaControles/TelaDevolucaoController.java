@@ -9,6 +9,7 @@ import CodigosGerais.CaixaDeAlerta;
 import CodigosGerais.DocumentoType;
 import CodigosGerais.MudarCena;
 import DAO.EmprestimoDAO;
+import dataController.RenovacaoDataHolder;
 import entidades.Emprestimo;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,6 +54,7 @@ public class TelaDevolucaoController implements Initializable {
     private TableColumn<Emprestimo, String> numeroDocCol;
     
     private BorderPane root;
+    private boolean isRenovacao;
 
     /**
      * Initializes the controller class.
@@ -67,6 +69,14 @@ public class TelaDevolucaoController implements Initializable {
         
         Platform.runLater(() -> {
             root = (BorderPane) btVoltar.getScene().getRoot();
+            if (root.getUserData() instanceof RenovacaoDataHolder){
+                isRenovacao = true;
+                System.out.println("Renovacao");
+            } else{
+                isRenovacao = false;
+                System.out.println("Devolucao");
+            }
+            root.setUserData(null);
         });
     }    
 

@@ -8,15 +8,15 @@ package telaControles;
 import CodigosGerais.MudarCena;
 import CodigosGerais.Navegar;
 import dataController.EmprestimoDataHolder;
-import entidades.Usuario;
+import dataController.RenovacaoDataHolder;
+import entidades.Emprestimo;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -38,16 +38,18 @@ public class TelaInicialController implements Initializable {
     @FXML
     private Button btDevolver;
     @FXML
-    private BorderPane root;
-    @FXML
     private Button btRelatorio;
+    
+    private BorderPane root;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Platform.runLater(() -> {
+            root = (BorderPane) btEmprestar.getScene().getRoot();
+        });
     }    
 
     @FXML
@@ -65,19 +67,6 @@ public class TelaInicialController implements Initializable {
         root.setUserData(new EmprestimoDataHolder());
         new MudarCena("./telas/TelaEmprestimo.fxml", root);
     }
-    
-    private void chamaEditarLivro(ActionEvent event) {
-        new MudarCena("./telas/TelaEmprestimo2.fxml", root);
-    }
-
-    private void chamarEditarUsuario(ActionEvent event) {
-        
-        new MudarCena("./telas/TelaEditarUsuario.fxml", root);
-    }
-
-    private void chamaTelaInicial(ActionEvent event) {
-        new MudarCena("./telas/TelaInicial.fxml", root);
-    }
 
     @FXML
     private void chamaTelaRelatorio(ActionEvent event) {
@@ -86,7 +75,8 @@ public class TelaInicialController implements Initializable {
 
     @FXML
     private void chamarRenovar(ActionEvent event) {
-        
+        root.setUserData(new RenovacaoDataHolder());
+        new MudarCena("./telas/TelaDevolucao.fxml", root);
     }
 
     @FXML

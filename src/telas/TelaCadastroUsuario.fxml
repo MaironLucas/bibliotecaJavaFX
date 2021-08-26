@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -24,26 +25,37 @@
          <children>
             <VBox prefHeight="374.0" prefWidth="759.0">
                <children>
-                  <HBox prefHeight="75.0" prefWidth="689.0" styleClass="painelCentral">
+                  <HBox>
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" />
-                        <TextField fx:id="inputNome" prefHeight="25.0" prefWidth="299.0" promptText="Obrigatório" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone:" />
-                        <TextField fx:id="inputTelefone" prefHeight="25.0" prefWidth="154.0" promptText="Obrigatório" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="80.0" prefWidth="341.0" styleClass="painelCentral">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Documento:" />
-                        <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="142.0">
+                        <VBox prefHeight="135.0" prefWidth="632.0">
                            <children>
-                              <RadioButton fx:id="rCPF" mnemonicParsing="false" text="CPF" />
-                              <RadioButton fx:id="rRG" mnemonicParsing="false" text="RG" />
-                              <RadioButton fx:id="rEstudante" mnemonicParsing="false" text="Carteira de Estudante" />
+                              <HBox prefHeight="75.0" prefWidth="689.0" styleClass="painelCentral">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:" />
+                                    <TextField fx:id="inputNome" prefHeight="25.0" prefWidth="299.0" promptText="Obrigatório" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone:" />
+                                    <TextField fx:id="inputTelefone" prefHeight="25.0" prefWidth="154.0" promptText="Obrigatório" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="80.0" prefWidth="341.0" styleClass="painelCentral">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Documento:" />
+                                    <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="142.0">
+                                       <children>
+                                          <RadioButton fx:id="rCPF" mnemonicParsing="false" text="CPF" />
+                                          <RadioButton fx:id="rRG" mnemonicParsing="false" text="RG" />
+                                          <RadioButton fx:id="rEstudante" mnemonicParsing="false" text="Carteira de Estudante" />
+                                       </children>
+                                    </VBox>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="n*:" />
+                                    <TextField fx:id="inputDocumento" prefHeight="25.0" prefWidth="153.0" promptText="Obrigatório" />
+                                    <TextField fx:id="inputCaminho" prefHeight="26.0" prefWidth="154.0" promptText="Caminho foto" />
+                                    <Button mnemonicParsing="false" onAction="#buscarFoto" styleClass="seletor" text="..." />
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="n*:" />
-                        <TextField fx:id="inputDocumento" prefHeight="25.0" prefWidth="153.0" promptText="Obrigatório" />
+                        <ImageView fx:id="fotoUsuario" fitHeight="135.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelCentral">

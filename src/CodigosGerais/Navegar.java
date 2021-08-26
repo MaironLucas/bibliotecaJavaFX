@@ -24,7 +24,7 @@ public class Navegar {
             Scene scene = new Scene(newScene);
             stage.setScene(scene);
         } catch (IOException ex) {
-            System.out.println("Lamentavel");
+            System.out.println(ex.getMessage());
         }
     }
 }

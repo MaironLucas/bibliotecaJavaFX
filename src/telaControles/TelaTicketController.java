@@ -84,6 +84,7 @@ public class TelaTicketController implements Initializable {
                 emprestimoBol = true;
                 renovacao = false;
                 devolucao = false;
+                System.out.println("Emprestimo");
             } else{
                 emprestimo = (Emprestimo) root.getUserData();
                 usuarioSel = emprestimo.getIDUsuario();
@@ -91,6 +92,7 @@ public class TelaTicketController implements Initializable {
                 emprestimoBol = false;
                 renovacao = false;
                 devolucao = true;
+                System.out.println("Devolucao");
             }
             
             if (devolucao){
@@ -123,7 +125,7 @@ public class TelaTicketController implements Initializable {
     private void povoarEmprestimo(){
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         txtDataEmprestimo.setText(format.format(emprestimo.getDataEmprestimo()));
-        txtDataDevolucao.setText(format.format(emprestimo.getDataDevolucao()));
+        txtDataDevolucao.setText(format.format(emprestimo.getPrazo()));
         txtTempo.setText(Integer.toString(emprestimo.getTempoDeEmprestimo()));
     }
     

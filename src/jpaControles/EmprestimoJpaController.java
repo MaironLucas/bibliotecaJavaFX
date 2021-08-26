@@ -14,6 +14,7 @@ import javax.persistence.criteria.Root;
 import entidades.Livro;
 import entidades.Usuario;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -225,7 +226,11 @@ public class EmprestimoJpaController implements Serializable {
     public int countEmprestadosData(Date d) {
         EntityManager em = getEntityManager();
         Query q = em.createNamedQuery("Emprestimo.countPerDate");
-        q.setParameter("dataDoGrafico", d);
-        return q.getFirstResult();
+        q.setParameter("inicioDoDia", d);
+        System.out.println("\n" + d);
+        Date amanha = new Date(d.getTime() + 86400020);
+        System.out.println(amanha);
+        q.setParameter("fimDoDia", amanha);
+        return ((Number) q.getSingleResult()).intValue();
     }
 }

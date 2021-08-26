@@ -29,7 +29,7 @@
             <Menu mnemonicParsing="false" text="Empréstimo">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#chamarEmprestarLivro" text="Novo" />
-                  <MenuItem mnemonicParsing="false" text="Renovar" />
+                  <MenuItem mnemonicParsing="false" onAction="#chamarRenovar" text="Renovar" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Devolução">

@@ -15,7 +15,9 @@ import DAO.UsuarioDAO;
 import dataController.EmprestimoDataHolder;
 import entidades.Usuario;
 import exceptions.ExceptionGenerica;
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -29,8 +31,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -83,6 +88,7 @@ public class TelaCadastroUsuarioController implements Initializable {
 
     private ToggleGroup group1;
     private ToggleGroup group;
+    private String path;
     @FXML
     private TextField inputNumero;
 
@@ -90,6 +96,10 @@ public class TelaCadastroUsuarioController implements Initializable {
     private boolean edicao;
     @FXML
     private Label textTitulo;
+    @FXML
+    private ImageView fotoUsuario;
+    @FXML
+    private TextField inputCaminho;
 
     /**
      * Initializes the controller class.
@@ -104,8 +114,16 @@ public class TelaCadastroUsuarioController implements Initializable {
                 edicao = true;
                 textTitulo.setText("Edição de Usuário");
                 povoarCampos();
+                
+                //Iniciando foto
+                Image temp = new Image(usuarioSel.getFoto() == null ? "./assets/defaultUser.png" : usuarioSel.getFoto());
+                fotoUsuario.setImage(temp);
             } else {
                 edicao = false;
+                
+                //Iniciando foto
+                Image temp = new Image("./assets/defaultUser.png");
+                fotoUsuario.setImage(temp);
             }
         });
 
@@ -151,7 +169,6 @@ public class TelaCadastroUsuarioController implements Initializable {
         //Deixando seleção de motivo invisivel
         textMotivo.setVisible(false);
         btMotivo.setVisible(false);
-
     }
 
     @FXML
@@ -305,6 +322,26 @@ public class TelaCadastroUsuarioController implements Initializable {
         }
         // UF
         btUF.setValue(usuarioSel.getUf());
+    }
+
+    @FXML
+    private void buscarFoto(ActionEvent event) {
+        try {
+            FileChooser arquivo = new FileChooser();
+            arquivo.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
+            File temp = arquivo.showOpenDialog((Stage) btVoltar.getScene().getWindow());
+            System.out.println(temp);
+            Path relativo = temp.toPath();
+            System.out.println(relativo);
+            relativo = relativo.relativize(relativo);
+            path = relativo.toString();
+            System.out.println(path);
+            Image imagem = new Image(path);
+            fotoUsuario.setImage(imagem);
+            inputCaminho.setText(path);
+        } catch (Exception e) {
+            new CaixaDeAlerta(Alert.AlertType.ERROR, "Erro de carregamento", e.getMessage());
+        }
     }
 
 }

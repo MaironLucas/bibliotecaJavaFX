@@ -80,7 +80,7 @@ public class TelaRelatorioController implements Initializable {
             s = Integer.toString(dateGrafico.getDayOfMonth()) + "/" + Integer.toString(dateGrafico.getMonthValue());
             Date dataConvertida = Date.from(dateGrafico.atStartOfDay(ZoneId.systemDefault()).toInstant());  
             int valor = emprestimoDAO.getCountPerDate(dataConvertida);
-            System.out.println(dataConvertida);
+            System.out.println(valor);
             serie1.getData().add(new XYChart.Data(s, valor));
             dateGrafico = dateGrafico.plusDays(1);
             
