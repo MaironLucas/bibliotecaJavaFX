@@ -15,6 +15,7 @@ import entidades.Usuario;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -25,9 +26,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -70,11 +73,22 @@ public class TelaEmprestimoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        fotoCol.setCellValueFactory(new PropertyValueFactory<>("foto"));
         nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tipoDocCol.setCellValueFactory((param) -> new SimpleStringProperty(DocumentoType.getDescriptionByIndex(param.getValue().getTipoDoc())));
         numeroDocCol.setCellValueFactory(new PropertyValueFactory<>("numDoc"));
         telefoneCol.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+        
+        fotoCol.setCellValueFactory(new Callback<CellDataFeatures<Usuario, ImageView>, ObservableValue<ImageView>>() {
+            public ObservableValue<ImageView> call(CellDataFeatures<Usuario, ImageView> p) {
+                Image temp = new Image(p.getValue().getFoto() == null ? "./assets/defaultUser.png" : p.getValue().getFoto());
+                ImageView imgV = new ImageView();
+                imgV.setImage(temp);
+                imgV.setFitHeight(50);
+                imgV.setFitWidth(50);
+                return new ReadOnlyObjectWrapper(imgV);
+            }
+        });
+        //fotoCol.setStyle("-fx-alignment:CENTER;");
 
         Platform.runLater(() -> {
             root = (BorderPane) btVoltar.getScene().getRoot();

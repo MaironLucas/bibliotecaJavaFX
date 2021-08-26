@@ -94,7 +94,7 @@ public class TelaTicketController implements Initializable {
             }
             
             if (devolucao){
-                
+                txtTitulo.setText("Comprovante de Devolução");
             } else{
                 if (renovacao){
                     

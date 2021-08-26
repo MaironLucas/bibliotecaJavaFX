@@ -24,3 +24,7 @@
     -fx-background-color: #cccccc;
     -fx-padding:0 30 10 30;
 }
+
+.table-column {
+  -fx-alignment: CENTER;
+}
