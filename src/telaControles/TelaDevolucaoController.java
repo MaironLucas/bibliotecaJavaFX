@@ -5,22 +5,26 @@
  */
 package telaControles;
 
+import CodigosGerais.CaixaDeAlerta;
 import CodigosGerais.DocumentoType;
+import CodigosGerais.MudarCena;
 import DAO.EmprestimoDAO;
 import entidades.Emprestimo;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -47,6 +51,8 @@ public class TelaDevolucaoController implements Initializable {
     private TableColumn<Emprestimo, String> tipoDocCol;
     @FXML
     private TableColumn<Emprestimo, String> numeroDocCol;
+    
+    private BorderPane root;
 
     /**
      * Initializes the controller class.
@@ -58,14 +64,27 @@ public class TelaDevolucaoController implements Initializable {
         nomeCol.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getIDUsuario().getNome()));
         tipoDocCol.setCellValueFactory((param) -> new SimpleStringProperty(DocumentoType.getDescriptionByIndex(param.getValue().getIDUsuario().getTipoDoc())));
         numeroDocCol.setCellValueFactory((param) -> new SimpleStringProperty(param.getValue().getIDUsuario().getNumDoc()));
+        
+        Platform.runLater(() -> {
+            root = (BorderPane) btVoltar.getScene().getRoot();
+        });
     }    
 
     @FXML
     private void chamarTelaInicial(ActionEvent event) {
+        root.setUserData(null);
+        new MudarCena("./telas/TelaInicial.fxml", root);
     }
 
     @FXML
     private void avancarParaDevolucao(ActionEvent event) {
+        Emprestimo emprestimoSel = tabelaDeEmprestimos.getSelectionModel().getSelectedItem();
+        if (emprestimoSel == null){
+            new CaixaDeAlerta(Alert.AlertType.ERROR, "Falha de Seleção", "Um emprestimo deve ser selecionado!");
+        } else{
+            root.setUserData(emprestimoSel);
+            new MudarCena("./telas/TelaDevolucao2.fxml", root);
+        }  
     }
 
     @FXML

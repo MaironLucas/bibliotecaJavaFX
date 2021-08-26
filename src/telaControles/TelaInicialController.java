@@ -83,4 +83,14 @@ public class TelaInicialController implements Initializable {
     private void chamaTelaRelatorio(ActionEvent event) {
         new MudarCena("./telas/TelaRelatorio.fxml", root);
     }
+
+    @FXML
+    private void chamarRenovar(ActionEvent event) {
+        
+    }
+
+    @FXML
+    private void chamarDevolver(ActionEvent event) {
+        new MudarCena("./telas/TelaDevolucao.fxml", root);
+    }
 }

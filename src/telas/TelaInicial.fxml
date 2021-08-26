@@ -21,8 +21,8 @@
             </HBox>
             <HBox prefHeight="176.0" prefWidth="633.0" styleClass="painelBotoesInferior">
                <children>
-                  <Button fx:id="btRenovar" mnemonicParsing="false" styleClass="button-inicial" text="Renovar&#10;Empréstimo" textAlignment="CENTER" />
-                  <Button fx:id="btDevolver" mnemonicParsing="false" styleClass="button-inicial" text="Realizar&#10;Devolução" textAlignment="CENTER" />
+                  <Button fx:id="btRenovar" mnemonicParsing="false" onAction="#chamarRenovar" styleClass="button-inicial" text="Renovar&#10;Empréstimo" textAlignment="CENTER" />
+                  <Button fx:id="btDevolver" mnemonicParsing="false" onAction="#chamarDevolver" styleClass="button-inicial" text="Realizar&#10;Devolução" textAlignment="CENTER" />
                   <Button fx:id="btRelatorio" mnemonicParsing="false" onAction="#chamaTelaRelatorio" styleClass="button-inicial" text="Ver&#10;Relatório" textAlignment="CENTER" />
                </children>
             </HBox>
