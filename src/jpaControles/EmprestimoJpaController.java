@@ -13,6 +13,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Livro;
 import entidades.Usuario;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -193,7 +195,7 @@ public class EmprestimoJpaController implements Serializable {
             em.close();
         }
     }
-    
+
     public List<Emprestimo> findEmprestados(String nome, String documento, String isbn, String titulo) {
         EntityManager em = getEntityManager();
         try {
@@ -208,8 +210,8 @@ public class EmprestimoJpaController implements Serializable {
             em.close();
         }
     }
-    
-        public List<Emprestimo> findAllEmprestados() {
+
+    public List<Emprestimo> findAllEmprestados() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -218,5 +220,12 @@ public class EmprestimoJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public int countEmprestadosData(Date d) {
+        EntityManager em = getEntityManager();
+        Query q = em.createNamedQuery("Emprestimo.countPerDate");
+        q.setParameter("dataDoGrafico", d);
+        return q.getFirstResult();
     }
 }

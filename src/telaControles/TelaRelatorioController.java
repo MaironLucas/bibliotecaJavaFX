@@ -73,11 +73,15 @@ public class TelaRelatorioController implements Initializable {
         //Date dateGrafico = Date.from(LocalDate.now().minusDays(10).atStartOfDay(ZoneId.systemDefault()).toInstant());
         LocalDate dateGrafico = LocalDate.now().minusDays(10);
         String s;
+        EmprestimoDAO emprestimoDAO = new EmprestimoDAO(); 
         for(int a=0; a<10; a++)
         {
 
             s = Integer.toString(dateGrafico.getDayOfMonth()) + "/" + Integer.toString(dateGrafico.getMonthValue());
-            serie1.getData().add(new XYChart.Data(s, a));
+            Date dataConvertida = Date.from(dateGrafico.atStartOfDay(ZoneId.systemDefault()).toInstant());  
+            int valor = emprestimoDAO.getCountPerDate(dataConvertida);
+            System.out.println(dataConvertida);
+            serie1.getData().add(new XYChart.Data(s, valor));
             dateGrafico = dateGrafico.plusDays(1);
             
         }

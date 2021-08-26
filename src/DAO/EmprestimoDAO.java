@@ -6,6 +6,8 @@
 package DAO;
 
 import entidades.Emprestimo;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -64,5 +66,9 @@ public class EmprestimoDAO {
 
     public List<Emprestimo> getAllEmprestados() {
         return objetoJPA.findAllEmprestados();
+    }
+    
+    public int getCountPerDate(Date d){
+        return objetoJPA.countEmprestadosData(d);
     }
 }
