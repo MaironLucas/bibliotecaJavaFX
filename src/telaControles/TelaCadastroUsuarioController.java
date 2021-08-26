@@ -90,13 +90,12 @@ public class TelaCadastroUsuarioController implements Initializable {
     private ImageView fotoUsuario;
     @FXML
     private TextField inputCaminho;
-    
+
     private ToggleGroup group1;
     private ToggleGroup group;
     private String path;
     private Usuario usuarioSel;
     private boolean edicao;
-    
 
     /**
      * Initializes the controller class.
@@ -111,14 +110,14 @@ public class TelaCadastroUsuarioController implements Initializable {
                 edicao = true;
                 textTitulo.setText("Edição de Usuário");
                 povoarCampos();
-                
+
                 //Iniciando foto
                 path = usuarioSel.getFoto();
                 Image temp = new Image(path == null ? "./assets/defaultUser.png" : path);
                 fotoUsuario.setImage(temp);
             } else {
                 edicao = false;
-                
+
                 //Iniciando foto
                 Image temp = new Image("./assets/defaultUser.png");
                 fotoUsuario.setImage(temp);
@@ -215,8 +214,9 @@ public class TelaCadastroUsuarioController implements Initializable {
             } else {
                 usuario.setMotivo(null);
             }
-            if (path != null)
+            if (path != null) {
                 usuario.setFoto(path);
+            }
             usuario.setNumDoc(inputDocumento.getText());
             DocumentoType tipoDocTemp = (DocumentoType) group.getSelectedToggle().getUserData();
             usuario.setTipoDoc(tipoDocTemp.getIndex());
@@ -239,14 +239,20 @@ public class TelaCadastroUsuarioController implements Initializable {
             try {
                 UsuarioDAO usuarioPersist = new UsuarioDAO();
                 if (!edicao) {
-                    usuarioPersist.add(usuario);
-                    new SucessoAlert("Usuário cadastrado com sucesso");
+                    if (usuarioPersist.getByNumDoc(usuario.getNumDoc()).isEmpty()) {
+                        usuarioPersist.add(usuario);
+                        new SucessoAlert("Usuário cadastrado com sucesso");
+                        new Navegar("./telas/Menu.fxml", (Stage) btVoltar.getScene().getWindow());
+                    } else {
+                        new CaixaDeAlerta(Alert.AlertType.ERROR, "Numero de documento repetido", "Já existe um usuário com este número de documento");
+                    }
                 } else {
                     usuario.setIDUsuario(usuarioSel.getIDUsuario());
                     usuarioPersist.edit(usuario);
                     new SucessoAlert("Usuário editado com sucesso");
+                    new Navegar("./telas/Menu.fxml", (Stage) btVoltar.getScene().getWindow());
                 }
-                new Navegar("./telas/Menu.fxml", (Stage) btVoltar.getScene().getWindow());
+
             } catch (Exception e) {
                 new CaixaDeAlerta(Alert.AlertType.ERROR, "Erro", e.getMessage());
             }
@@ -331,12 +337,12 @@ public class TelaCadastroUsuarioController implements Initializable {
             arquivo.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
             arquivo.setInitialDirectory(new File(".\\src\\assets"));
             File temp = arquivo.showOpenDialog((Stage) btSalvar.getScene().getWindow());
-            if (temp != null){
+            if (temp != null) {
                 path = temp.toURI().toString();
                 Image imagem = new Image(path);
                 fotoUsuario.setImage(imagem);
                 inputCaminho.setText(path);
-            }  
+            }
         } catch (Exception e) {
             new CaixaDeAlerta(Alert.AlertType.ERROR, "Erro de carregamento", e.getMessage());
         }
