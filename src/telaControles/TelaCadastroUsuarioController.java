@@ -12,12 +12,10 @@ import CodigosGerais.Navegar;
 import CodigosGerais.StatusType;
 import CodigosGerais.SucessoAlert;
 import DAO.UsuarioDAO;
-import dataController.EmprestimoDataHolder;
 import entidades.Usuario;
 import exceptions.ExceptionGenerica;
 import java.io.File;
 import java.net.URL;
-import java.nio.file.Path;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -33,7 +31,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -85,28 +82,28 @@ public class TelaCadastroUsuarioController implements Initializable {
     private Text textMotivo;
     @FXML
     private ChoiceBox<String> btUF;
-
-    private ToggleGroup group1;
-    private ToggleGroup group;
-    private String path;
     @FXML
     private TextField inputNumero;
-
-    private Usuario usuarioSel;
-    private boolean edicao;
     @FXML
     private Label textTitulo;
     @FXML
     private ImageView fotoUsuario;
     @FXML
     private TextField inputCaminho;
+    
+    private ToggleGroup group1;
+    private ToggleGroup group;
+    private String path;
+    private Usuario usuarioSel;
+    private boolean edicao;
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        path = null;
         Platform.runLater(() -> {
             Stage stagetemp = (Stage) btVoltar.getScene().getWindow();
             usuarioSel = (Usuario) stagetemp.getUserData();
@@ -116,7 +113,8 @@ public class TelaCadastroUsuarioController implements Initializable {
                 povoarCampos();
                 
                 //Iniciando foto
-                Image temp = new Image(usuarioSel.getFoto() == null ? "./assets/defaultUser.png" : usuarioSel.getFoto());
+                path = usuarioSel.getFoto();
+                Image temp = new Image(path == null ? "./assets/defaultUser.png" : path);
                 fotoUsuario.setImage(temp);
             } else {
                 edicao = false;
@@ -217,6 +215,8 @@ public class TelaCadastroUsuarioController implements Initializable {
             } else {
                 usuario.setMotivo(null);
             }
+            if (path != null)
+                usuario.setFoto(path);
             usuario.setNumDoc(inputDocumento.getText());
             DocumentoType tipoDocTemp = (DocumentoType) group.getSelectedToggle().getUserData();
             usuario.setTipoDoc(tipoDocTemp.getIndex());
@@ -328,16 +328,15 @@ public class TelaCadastroUsuarioController implements Initializable {
     private void buscarFoto(ActionEvent event) {
         try {
             FileChooser arquivo = new FileChooser();
-            arquivo.setInitialDirectory(new File(".\\src\\assets"));
             arquivo.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
-            File temp = arquivo.showOpenDialog((Stage) btVoltar.getScene().getWindow());
-            Path temp2 = temp.toPath();
-            Path relativo = temp2.relativize(temp2);
-            System.out.println(relativo);
-            //path = relativo.toString();
-            //Image imagem = new Image(path);
-            //fotoUsuario.setImage(imagem);
-            //inputCaminho.setText(path);
+            arquivo.setInitialDirectory(new File(".\\src\\assets"));
+            File temp = arquivo.showOpenDialog((Stage) btSalvar.getScene().getWindow());
+            if (temp != null){
+                path = temp.toURI().toString();
+                Image imagem = new Image(path);
+                fotoUsuario.setImage(imagem);
+                inputCaminho.setText(path);
+            }  
         } catch (Exception e) {
             new CaixaDeAlerta(Alert.AlertType.ERROR, "Erro de carregamento", e.getMessage());
         }

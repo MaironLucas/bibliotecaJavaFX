@@ -129,7 +129,7 @@ public class TelaEmprestimo2Controller implements Initializable {
     @FXML
     private void voltar(ActionEvent event) {
         if (edicao)
-            new MudarCena("./telas/Menu.fxml", root);
+            new MudarCena("./telas/TelaInicial.fxml", root);
         else
             new MudarCena("./telas/TelaEmprestimo.fxml", root);
     }

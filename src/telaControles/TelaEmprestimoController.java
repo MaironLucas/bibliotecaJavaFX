@@ -7,6 +7,7 @@ package telaControles;
 
 import CodigosGerais.CaixaDeAlerta;
 import CodigosGerais.DocumentoType;
+import CodigosGerais.EditarUserAlert;
 import CodigosGerais.MudarCena;
 import CodigosGerais.Navegar;
 import DAO.UsuarioDAO;
@@ -133,10 +134,14 @@ public class TelaEmprestimoController implements Initializable {
                 stagetemp.setUserData(usuarioSel);
                 Navegar temp = new Navegar("./telas/TelaCadastroUsuario.fxml", (Stage) root.getScene().getWindow());
             } else {
-                EmprestimoDataHolder emprestimo = new EmprestimoDataHolder();
-                emprestimo.setUsuario(usuarioSel);
-                root.setUserData(emprestimo);
-                new MudarCena("./telas/TelaEmprestimo2.fxml", root);
+                if ((usuarioSel.getStatus() == 2) || (usuarioSel.getStatus() == 3)){
+                    new EditarUserAlert((Stage) btVoltar.getScene().getWindow(), usuarioSel);
+                } else{
+                    EmprestimoDataHolder emprestimo = new EmprestimoDataHolder();
+                    emprestimo.setUsuario(usuarioSel);
+                    root.setUserData(emprestimo);
+                    new MudarCena("./telas/TelaEmprestimo2.fxml", root);
+                }
             }
 
         }

@@ -92,6 +92,7 @@ public class TelaCadastroLivroController implements Initializable {
         try {
             FileChooser arquivo = new FileChooser();
             arquivo.getExtensionFilters().addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg"));
+            arquivo.setInitialDirectory(new File(".\\src\\assets"));
             File temp = arquivo.showOpenDialog((Stage) btnBuscar.getScene().getWindow());
             caminho = temp.toURI().toString();
             System.out.println(caminho);

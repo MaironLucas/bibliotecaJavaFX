@@ -15,7 +15,6 @@
       <HBox alignment="CENTER" prefHeight="58.0" prefWidth="763.0" styleClass="painelBotoes" stylesheets="@../assets/barraDeBotoes.css" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btVoltar" mnemonicParsing="false" onAction="#chamarTelaInicial" styleClass="voltar" text="Voltar" />
-            <Button mnemonicParsing="false" onAction="#limparCampos" styleClass="limpar" text="Limpar" />
             <Button fx:id="btnAvancar" mnemonicParsing="false" onAction="#avancarParaLivro" styleClass="salvar" text="Avancar" />
          </children>
       </HBox>
