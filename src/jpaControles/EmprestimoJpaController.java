@@ -228,7 +228,7 @@ public class EmprestimoJpaController implements Serializable {
         Query q = em.createNamedQuery("Emprestimo.countPerDate");
         q.setParameter("inicioDoDia", d);
         System.out.println("\n" + d);
-        Date amanha = new Date(d.getTime() + 86400020);
+        Date amanha = new Date(d.getTime() + 86340020);
         System.out.println(amanha);
         q.setParameter("fimDoDia", amanha);
         return ((Number) q.getSingleResult()).intValue();

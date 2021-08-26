@@ -86,6 +86,7 @@ public class TelaRelatorioController implements Initializable {
             
         }
         
+        
         grafico.getData().clear();
         grafico.getData().add(serie1);
         
