@@ -10,6 +10,8 @@ import CodigosGerais.Navegar;
 import dataController.EmprestimoDataHolder;
 import dataController.RenovacaoDataHolder;
 import entidades.Emprestimo;
+import entidades.Livro;
+import entidades.Usuario;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -39,8 +41,12 @@ public class TelaInicialController implements Initializable {
     private Button btDevolver;
     @FXML
     private Button btRelatorio;
-    
+
     private BorderPane root;
+    @FXML
+    private Button btEditarUser;
+    @FXML
+    private Button btEditarLivro;
 
     /**
      * Initializes the controller class.
@@ -50,7 +56,7 @@ public class TelaInicialController implements Initializable {
         Platform.runLater(() -> {
             root = (BorderPane) btEmprestar.getScene().getRoot();
         });
-    }    
+    }
 
     @FXML
     private void chamarCadastroLivro(ActionEvent event) {
@@ -82,5 +88,17 @@ public class TelaInicialController implements Initializable {
     @FXML
     private void chamarDevolver(ActionEvent event) {
         new MudarCena("./telas/TelaDevolucao.fxml", root);
+    }
+
+    @FXML
+    private void chamaTelaEditarUsuario(ActionEvent event) {
+        root.setUserData(new Usuario());
+        new MudarCena("./telas/TelaEmprestimo.fxml", root);
+    }
+
+    @FXML
+    private void chamaTelaEditarLivro(ActionEvent event) {
+        root.setUserData(new Livro());
+        new MudarCena("./telas/TelaEmprestimo2.fxml", root);
     }
 }
