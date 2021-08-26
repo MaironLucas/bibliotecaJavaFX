@@ -134,14 +134,24 @@ public class TelaCadastroLivroController implements Initializable {
             try {
                 LivroDAO livroDao = new LivroDAO();
                 if (!edicao) {
-                    livroDao.add(livro);
-                    new SucessoAlert("Livro cadastrado com sucesso");
+                    if (livroDao.getByIsbn(livro.getIsbn()).isEmpty()) {
+                        if (livroDao.getbyTitulo(livro.getTitulo()).isEmpty()) {
+                            livroDao.add(livro);
+                            new SucessoAlert("Livro cadastrado com sucesso");
+                            new Navegar("./telas/Menu.fxml", (Stage) btVoltar.getScene().getWindow());
+                        } else {
+                            new CaixaDeAlerta(Alert.AlertType.ERROR, "Titulo já cadastrado", "Já existe um exemplar com este título");
+                        }
+                    } else {
+                        new CaixaDeAlerta(Alert.AlertType.ERROR, "IBSN já cadastrado", "Já existe um exemplar com este ISBN");
+                    }
                 } else {
                     livro.setIDLivro(livroSel.getIDLivro());
                     livroDao.edit(livro);
                     new SucessoAlert("Livro editado com sucesso");
+                    new Navegar("./telas/Menu.fxml", (Stage) btVoltar.getScene().getWindow());
                 }
-                new Navegar("./telas/Menu.fxml", (Stage) btVoltar.getScene().getWindow());
+                
             } catch (Exception e) {
                 new CaixaDeAlerta(Alert.AlertType.ERROR, "Falha no banco", e.getMessage());
             }
