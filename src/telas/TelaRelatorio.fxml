@@ -50,10 +50,10 @@
                   </TableView>
                   <BarChart fx:id="grafico" prefHeight="325.0" prefWidth="443.0">
                     <xAxis>
-                      <CategoryAxis side="BOTTOM" />
+                      <CategoryAxis fx:id="grafDias" label="Data" side="BOTTOM" />
                     </xAxis>
                     <yAxis>
-                      <NumberAxis side="LEFT" />
+                      <NumberAxis fx:id="grafEmp" label="N° Empréstimos" side="LEFT" />
                     </yAxis>
                   </BarChart>
                </children>

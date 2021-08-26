@@ -25,6 +25,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -48,6 +51,10 @@ public class TelaRelatorioController implements Initializable {
     private TableColumn<Emprestimo, String> colLivro;
     @FXML
     private TableColumn<Emprestimo, String> colTempo;
+    @FXML
+    private NumberAxis grafEmp;
+    @FXML
+    private CategoryAxis grafDias;
 
     /**
      * Initializes the controller class.
@@ -61,7 +68,24 @@ public class TelaRelatorioController implements Initializable {
             int daysBetween = (int) Duration.between(dataEmprestimo.atStartOfDay(), dataAtual.atStartOfDay()).toDays();
             return new SimpleStringProperty(Integer.toString(daysBetween));
         });
+        
+        XYChart.Series serie1 = new XYChart.Series();
+        //Date dateGrafico = Date.from(LocalDate.now().minusDays(10).atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate dateGrafico = LocalDate.now().minusDays(10);
+        String s;
+        for(int a=0; a<10; a++)
+        {
 
+            s = Integer.toString(dateGrafico.getDayOfMonth()) + "/" + Integer.toString(dateGrafico.getMonthValue());
+            serie1.getData().add(new XYChart.Data(s, a));
+            dateGrafico = dateGrafico.plusDays(1);
+            
+        }
+        
+        grafico.getData().clear();
+        grafico.getData().add(serie1);
+        
+        
         Platform.runLater(() -> {
             EmprestimoDAO emprestimoDao = new EmprestimoDAO();
             ObservableList<Emprestimo> listaDeEmprestimos = FXCollections.observableArrayList();
