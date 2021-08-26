@@ -13,6 +13,7 @@ import entidades.Emprestimo;
 import entidades.Livro;
 import entidades.Usuario;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -64,7 +65,9 @@ public class TelaTicketController implements Initializable {
     private Emprestimo emprestimo;
     @FXML
     private VBox caixaCentral;
-
+    private boolean devolucao;
+    private boolean emprestimoBol;
+    private boolean renovacao;
     /**
      * Initializes the controller class.
      */
@@ -73,10 +76,30 @@ public class TelaTicketController implements Initializable {
         Platform.runLater(() -> {
             root = (BorderPane) btImprimir.getScene().getRoot();
             EmprestimoDataHolder emprestimoData;
-            emprestimoData = (EmprestimoDataHolder) root.getUserData();
-            usuarioSel = emprestimoData.getUsuario();
-            livroSel = emprestimoData.getLivro();
-            emprestimo = emprestimoData.getEmprestimo();
+            if (root.getUserData() instanceof EmprestimoDataHolder){
+                emprestimoData = (EmprestimoDataHolder) root.getUserData();
+                usuarioSel = emprestimoData.getUsuario();
+                livroSel = emprestimoData.getLivro();
+                emprestimo = emprestimoData.getEmprestimo();
+                emprestimoBol = true;
+                renovacao = false;
+                devolucao = false;
+            } else{
+                emprestimo = (Emprestimo) root.getUserData();
+                usuarioSel = emprestimo.getIDUsuario();
+                livroSel = emprestimo.getIDLivro();
+                emprestimoBol = false;
+                renovacao = false;
+                devolucao = true;
+            }
+            
+            if (devolucao){
+                
+            } else{
+                if (renovacao){
+                    
+                }
+            }
             povoarUsuario();
             povoarLivro();
             povoarEmprestimo();
@@ -96,10 +119,11 @@ public class TelaTicketController implements Initializable {
         txtIsbn.setText(livroSel.getIsbn());
         txtAutores.setText(livroSel.getAutores());
     }
-
+    
     private void povoarEmprestimo(){
-        txtDataEmprestimo.setText(emprestimo.getDataEmprestimo().toString());
-        txtDataDevolucao.setText(emprestimo.getPrazo().toString());
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        txtDataEmprestimo.setText(format.format(emprestimo.getDataEmprestimo()));
+        txtDataDevolucao.setText(format.format(emprestimo.getDataDevolucao()));
         txtTempo.setText(Integer.toString(emprestimo.getTempoDeEmprestimo()));
     }
     

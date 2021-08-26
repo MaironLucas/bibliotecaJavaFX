@@ -26,6 +26,15 @@ public enum MotivoType {
         return description;
     }
     
+    public static int getIndexByDescription(String desc){
+        for (MotivoType d : MotivoType.values()){
+            if(d.description.equals(desc)){
+                return d.index;
+            }       
+        }
+        return 0;
+    }
+    
     public Integer getIndex(){
         return index;
     }
