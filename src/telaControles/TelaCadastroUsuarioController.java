@@ -328,17 +328,16 @@ public class TelaCadastroUsuarioController implements Initializable {
     private void buscarFoto(ActionEvent event) {
         try {
             FileChooser arquivo = new FileChooser();
+            arquivo.setInitialDirectory(new File(".\\src\\assets"));
             arquivo.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
             File temp = arquivo.showOpenDialog((Stage) btVoltar.getScene().getWindow());
-            System.out.println(temp);
-            Path relativo = temp.toPath();
+            Path temp2 = temp.toPath();
+            Path relativo = temp2.relativize(temp2);
             System.out.println(relativo);
-            relativo = relativo.relativize(relativo);
-            path = relativo.toString();
-            System.out.println(path);
-            Image imagem = new Image(path);
-            fotoUsuario.setImage(imagem);
-            inputCaminho.setText(path);
+            //path = relativo.toString();
+            //Image imagem = new Image(path);
+            //fotoUsuario.setImage(imagem);
+            //inputCaminho.setText(path);
         } catch (Exception e) {
             new CaixaDeAlerta(Alert.AlertType.ERROR, "Erro de carregamento", e.getMessage());
         }

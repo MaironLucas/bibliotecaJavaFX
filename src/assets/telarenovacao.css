@@ -1,0 +1,20 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-color: #cccccc;
+}
+
+.painelTitulo{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #000000;
+    -fx-border-width: 0 0 2 0;
+    -fx-pref-height: 40;
+    -fx-alignment: center;
+}
+
+.labelTexto{
+    -fx-spacing:10;
+    -fx-alignment:center;
+}

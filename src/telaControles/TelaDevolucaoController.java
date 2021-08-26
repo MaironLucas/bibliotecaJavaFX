@@ -93,7 +93,11 @@ public class TelaDevolucaoController implements Initializable {
             new CaixaDeAlerta(Alert.AlertType.ERROR, "Falha de Seleção", "Um emprestimo deve ser selecionado!");
         } else{
             root.setUserData(emprestimoSel);
-            new MudarCena("./telas/TelaDevolucao2.fxml", root);
+            if (isRenovacao){
+                new MudarCena("./telas/TelaRenovacao.fxml", root);
+            } else{
+                new MudarCena("./telas/TelaDevolucao2.fxml", root);
+            }
         }  
     }
 
