@@ -12,7 +12,6 @@ import DAO.LivroDAO;
 import dataController.EmprestimoDataHolder;
 import entidades.Livro;
 import entidades.Usuario;
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -129,16 +128,16 @@ public class TelaEmprestimo2Controller implements Initializable {
 
     @FXML
     private void voltar(ActionEvent event) {
-        new MudarCena("./telas/TelaEmprestimo.fxml", root);
-    }
-
-    @FXML
-    private void editarLivro(ActionEvent event) {
-        new MudarCena("./telas/TelaEditarLivro.fxml", root);
+        if (edicao)
+            new MudarCena("./telas/Menu.fxml", root);
+        else
+            new MudarCena("./telas/TelaEmprestimo.fxml", root);
     }
 
     @FXML
     private void avancarParaEmprestimo(ActionEvent event) {
+        if (event.getSource() == btEditar)
+            edicao = true;
         //Faz as verificacoes (se foi selecionado, se é edicao de livro)
         Livro livroSel = tabelaLivros.getSelectionModel().getSelectedItem();
         if (livroSel == null) {

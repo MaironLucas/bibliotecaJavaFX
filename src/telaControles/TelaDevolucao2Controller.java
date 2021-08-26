@@ -12,7 +12,6 @@ import CodigosGerais.MudarCena;
 import DAO.EmprestimoDAO;
 import DAO.LivroDAO;
 import DAO.UsuarioDAO;
-import dataController.EmprestimoDataHolder;
 import entidades.Emprestimo;
 import entidades.Livro;
 import entidades.Usuario;
@@ -134,7 +133,8 @@ public class TelaDevolucao2Controller implements Initializable {
         }
         
         //Decrementando quantidade de livros emprestados
-        emprestimo.getIDLivro().setQtdemprestados(emprestimo.getIDLivro().getQtdemprestados() - 1);
+        Livro temp = emprestimo.getIDLivro();
+        temp.setQtdemprestados(temp.getQtdemprestados() - 1);
         
         //Lancando emprestimo, usuario e livro no banco
         try{
@@ -143,7 +143,7 @@ public class TelaDevolucao2Controller implements Initializable {
             LivroDAO livroDao = new LivroDAO();
             usuarioDao.edit(emprestimo.getIDUsuario());
             emprestimoDao.edit(emprestimo);
-            livroDao.edit(emprestimo.getIDLivro());
+            livroDao.edit(temp);
             root.setUserData(emprestimo);
             new MudarCena("./telas/TelaTicket.fxml", root);
         } catch (Exception e){

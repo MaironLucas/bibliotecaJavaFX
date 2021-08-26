@@ -128,13 +128,11 @@ public class TelaEmprestimo3Controller implements Initializable {
         Date date1 = new Date();
         date1 = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
         emprestimo.setDataEmprestimo(date1);
-        System.out.println(date1);
         
         //Calculando data de devolucao
         date = date.plusDays(diasDeEmprestimo);
         date1 = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
         emprestimo.setPrazo(date1);
-        System.out.println(date1);
         
         
         try{

@@ -74,7 +74,7 @@
       <HBox prefHeight="100.0" prefWidth="200.0" styleClass="painelBotoes" stylesheets="@../assets/barraDeBotoes.css" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btVoltar" mnemonicParsing="false" onAction="#voltar" styleClass="voltar" text="Voltar" />
-            <Button fx:id="btEditar" mnemonicParsing="false" onAction="#editarLivro" styleClass="limpar" text="Editar" />
+            <Button fx:id="btEditar" mnemonicParsing="false" onAction="#avancarParaEmprestimo" styleClass="limpar" text="Editar" />
             <Button fx:id="btAvancar" mnemonicParsing="false" onAction="#avancarParaEmprestimo" styleClass="salvar" text="Avancar" />
          </children>
       </HBox>
